@@ -1,0 +1,24 @@
+<div class="grid-comidas">
+  <div class="comida-card" *ngFor="let comida of comidas">
+    <a [routerLink]="['/comidas', comida.id]" class="comida-card-link">
+
+    <div class="imagen-wrapper">
+      <img [src]="comida.imagenUrl || 'assets/no-image.png'" alt="Imagen de la comida" />
+      <button class="estrella" (click)="toggleFavorito(comida)">
+        {{ comida.favorita ? '⭐' : '☆' }}
+      </button>
+      
+    </div>
+    <div class="contenido">
+      <h3>{{ comida.nombre }}</h3>
+      <p><strong>Ingredientes:</strong> {{ comida.ingredientes.length }}</p>
+      <p><strong>Creado:</strong> {{ comida.fechaCreacion | date:'shortDate' }}</p>
+    
+      <div class="acciones">
+        <button class="papelera" (click)="eliminarComida(comida)" title="Eliminar comida">🗑️</button>
+      </div>
+    </div>
+    </a>
+  </div>
+
+</div>

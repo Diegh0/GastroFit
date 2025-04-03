@@ -1,0 +1,16 @@
+<div class="detalle-comida" *ngIf="comida">
+    <img [src]="comida.imagenUrl || 'assets/no-image.png'" class="imagen" />
+  
+    <h2>{{ comida.nombre }} <span *ngIf="comida.favorita">⭐</span></h2>
+  
+    <ul class="ingredientes">
+      <li *ngFor="let i of comida.ingredientes">
+        <strong>{{ i.nombre }}</strong> — {{ i.gramos }}g
+        <br />
+        {{ i.caloriasPor100g }} kcal/100g → <strong>{{ (i.caloriasPor100g * i.gramos / 100) | number:'1.0-0' }} kcal</strong>
+        <br />
+        P: {{ i.proteinas }}g, G: {{ i.grasas }}g, H: {{ i.hidratos }}g
+      </li>
+    </ul>
+  </div>
+  

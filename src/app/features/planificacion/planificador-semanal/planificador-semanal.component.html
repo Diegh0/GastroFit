@@ -1,0 +1,33 @@
+<div class="planificador-wrapper">
+    <!-- Lista lateral -->
+    <aside class="lista-comidas">
+      <h3>🍽️ Comidas disponibles</h3>
+      <div class="comida-item" *ngFor="let comida of comidasDisponibles">
+        {{ comida.nombre }}
+      </div>
+    </aside>
+  
+    <!-- Calendario semanal -->
+    <section class="calendario">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th *ngFor="let dia of diasSemana">{{ dia }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let franja of franjas">
+            <th>{{ franja }}</th>
+            <td *ngFor="let dia of diasSemana">
+              <!-- Aquí se mostrarán comidas arrastradas -->
+              <div class="celda-drop"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <button (click)="agregarFranja()">➕ Añadir franja horaria</button>
+    </section>
+  </div>
+  

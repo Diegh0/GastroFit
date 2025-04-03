@@ -1,0 +1,20 @@
+<section class="contenedor-comidas">
+    <app-comida-form (nuevaComida)="agregarComida($event)"></app-comida-form>
+     
+    <div class="filtro-favoritos">
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="mostrarSoloFavoritos">
+        <span class="slider"></span>
+      </label>
+      <span>{{ mostrarSoloFavoritos ? 'Mostrar solo favoritos ⭐' : 'Mostrar todo 🍽️' }}</span>
+    </div>
+    
+    <h2>Historial de comidas</h2>
+    <app-comida-list
+    [comidas]="comidasFiltradas"
+    (favoritoCambiado)="toggleFavorito($event)"
+    (comidaEliminada)="eliminarComida($event)">
+  </app-comida-list>
+  
+  </section>
+  

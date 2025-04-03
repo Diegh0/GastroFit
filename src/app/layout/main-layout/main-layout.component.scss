@@ -1,0 +1,59 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #f7fdfb;
+  color: #2e4a42;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d0f0e0;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #c4e3d1;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #2e4a42;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: #2e4a42;
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem;
+
+  &.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background-color: #4caf50;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    color: #388e3c;
+  }
+}
+
+.contenido {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
