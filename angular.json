@@ -17,8 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/planificador-dieta-ng17",
-            "baseHref": "/",
+            "outputPath": {
+              "base": "dist/planificador-dieta-ng17"
+            },
             "index": "src/index.html",
             "polyfills": [
               "zone.js"
@@ -41,13 +42,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "10kb",
-                  "maximumError": "20kb"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ],
               "outputHashing": "all"
@@ -106,3 +107,5 @@
     "analytics": false
   }
 }
+
+
