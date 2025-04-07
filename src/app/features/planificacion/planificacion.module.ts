@@ -5,6 +5,7 @@ import { PlanificacionRoutingModule } from './planificacion-routing.module';
 import { PlanificacionComponent } from './planificacion.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PlanificadorSemanalComponent } from './planificador-semanal/planificador-semanal.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { PlanificadorSemanalComponent } from './planificador-semanal/planificado
     CommonModule,
     DragDropModule,
     PlanificacionRoutingModule ,
-    PlanificadorSemanalComponent 
+    PlanificadorSemanalComponent ,
+    FormsModule
   ]
 })
 export class PlanificacionModule { }

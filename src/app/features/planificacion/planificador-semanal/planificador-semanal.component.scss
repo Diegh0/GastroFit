@@ -108,6 +108,42 @@
     font-size: 0.9rem;
     margin-left: 4px;
   }
+  .selector-semana {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  
+    input[type="date"] {
+      padding: 4px 8px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+  }
+  .boton-duplicar {
+    margin-left: 1rem;
+    background-color: #e3f2fd;
+    border: 1px solid #90caf9;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #bbdefb;
+    }
+  }
+  .duplicador-semana {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  
+    input {
+      margin-right: 0.5rem;
+    }
+  }
   
 }
 

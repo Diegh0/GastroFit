@@ -14,6 +14,18 @@
   </aside>
 
   <section class="calendario" cdkDropListGroup>
+    <div class="selector-semana">
+      <label for="fecha">📅 Semana:</label>
+      <input
+        id="fecha"
+        type="date"
+        [value]="fechaSemana"
+        (change)="cambiarSemana($event)"
+
+
+      />
+    </div>
+    
     <table class="tabla-calendario">
       <thead>
         <tr>
@@ -59,6 +71,15 @@
 
     <button class="boton-franja" (click)="agregarFranja()">➕ Añadir franja horaria</button>
     <button class="boton-resumen" (click)="verResumenSemanal()">📊 Ver resumen semanal</button>
+    <button class="boton-duplicar" (click)="mostrarDuplicador = !mostrarDuplicador">📋 Duplicar semana</button>
+
+<div class="duplicador-semana" *ngIf="mostrarDuplicador">
+  <label for="duplicarFecha">📅 Fecha destino:</label>
+  <input type="date" id="duplicarFecha" [(ngModel)]="fechaDuplicar" />
+  <button (click)="ejecutarDuplicado()">✅ Duplicar</button>
+</div>
+
+
 
 <div class="resumen-semanal" *ngIf="mostrarResumenSemanal && resumenSemanal">
   <h3>Resumen Nutricional Semanal</h3>
