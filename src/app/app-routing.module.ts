@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { HomeComponent } from './home/home.component'; // 👈 Asegúrate de importar el componente
+
 
 const routes: Routes = [
   {
@@ -8,24 +10,22 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       {
+        path: '',
+        component: HomeComponent
+      },
+      {
         path: 'comidas',
-        loadChildren: () =>
-          import('./features/comidas/comidas.module').then(m => m.ComidasModule),
+        loadChildren: () => import('./features/comidas/comidas.module').then(m => m.ComidasModule),
       },
       {
         path: 'planificacion',
-        loadChildren: () =>
-          import('./features/planificacion/planificacion.module').then(m => m.PlanificacionModule),
-      },
-      {
-        path: '',
-        redirectTo: 'comidas',
-        pathMatch: 'full'
+        loadChildren: () => import('./features/planificacion/planificacion.module').then(m => m.PlanificacionModule),
       }
     ]
-  },
-  { path: 'planificacion', loadChildren: () => import('./features/planificacion/planificacion.module').then(m => m.PlanificacionModule) }
+  }
 ];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

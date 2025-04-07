@@ -18,5 +18,6 @@ export class ComidaListComponent {
 
   eliminarComida(comida: Comida): void {
     this.comidaEliminada.emit(comida);
+    
   }
 }
