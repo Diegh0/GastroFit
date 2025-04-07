@@ -144,6 +144,108 @@
       margin-right: 0.5rem;
     }
   }
+  .historial-semanas {
+    margin-top: 1rem;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+  
+    ul {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+  
+      button {
+        font-size: 0.9rem;
+      }
+    }
+  }
+  .confirmar {
+    background-color: #a5d6a7;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cancelar {
+    background-color: #ef9a9a;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  ///////////////////////
+  /* === MODAL GENERAL === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .modal {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+
+    h3,
+    p {
+      margin-bottom: 1rem;
+    }
+
+    input[type='date'] {
+      margin: 1rem 0;
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-botones {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      button {
+        flex: 1;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .confirmar {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .cancelar {
+        background-color: #f44336;
+        color: white;
+      }
+    }
+  }
+}
+
+  
   
 }
 

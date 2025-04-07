@@ -1,19 +1,26 @@
 <div class="contenedor-planificador">
+  <!-- LISTA LATERAL -->
   <aside
-  class="lista-comidas"
-  cdkDropList
-  id="lista-comidas"
-  [cdkDropListData]="comidasDisponibles"
-  [cdkDropListConnectedTo]="celdasIds" 
->
-
+    class="lista-comidas"
+    cdkDropList
+    id="lista-comidas"
+    [cdkDropListData]="comidasDisponibles"
+    [cdkDropListConnectedTo]="celdasIds"
+  >
     <h3>🍽️ Comidas disponibles</h3>
-    <div *ngFor="let comida of comidasDisponibles" class="comida-item" cdkDrag [cdkDragData]="comida">
+    <div
+      *ngFor="let comida of comidasDisponibles"
+      class="comida-item"
+      cdkDrag
+      [cdkDragData]="comida"
+    >
       {{ comida.nombre }}
     </div>
   </aside>
 
+  <!-- CALENDARIO -->
   <section class="calendario" cdkDropListGroup>
+    <!-- Selector de semana -->
     <div class="selector-semana">
       <label for="fecha">📅 Semana:</label>
       <input
@@ -21,75 +28,101 @@
         type="date"
         [value]="fechaSemana"
         (change)="cambiarSemana($event)"
-
-
       />
     </div>
-    
+
+    <!-- Tabla del calendario -->
     <table class="tabla-calendario">
       <thead>
         <tr>
           <th></th>
-          <!-- <th *ngFor="let dia of dias">{{ dia }}</th> -->
           <th *ngFor="let dia of dias">
             {{ dia }}
-            <button class="btn-resumen-dia" (click)="calcularResumenPorDia(dia)">📋</button>
+            <button class="btn-resumen-dia" (click)="calcularResumenPorDia(dia)">
+              📋
+            </button>
           </th>
-          
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let franja of franjas">
           <th>{{ franja }}</th>
           <td *ngFor="let dia of dias">
-            <div class="celda-drop" [id]="'celda-' + dia + '-' + franja" cdkDropList
+            <div
+              class="celda-drop"
+              [id]="'celda-' + dia + '-' + franja"
+              cdkDropList
               [cdkDropListData]="planificacion[franja][dia]"
               [cdkDropListConnectedTo]="['lista-comidas']"
-              (cdkDropListDropped)="onDrop($event, dia, franja)">
-              <div *ngFor="let comida of planificacion[franja][dia]; let i = index" class="comida-drop">
+              (cdkDropListDropped)="onDrop($event, dia, franja)"
+            >
+              <div
+                *ngFor="let comida of planificacion[franja][dia]; let i = index"
+                class="comida-drop"
+              >
                 {{ comida.nombre }}
-                <button class="btn-delete" (click)="eliminarComida(dia, franja, i)">❌</button>
+                <button class="btn-delete" (click)="eliminarComida(dia, franja, i)">
+                  ❌
+                </button>
               </div>
-              
             </div>
           </td>
         </tr>
       </tbody>
     </table>
-    <!-- Resúmenes diarios -->
-<div *ngFor="let dia of dias">
-  <div class="resumen-dia" *ngIf="mostrarResumenDia[dia] && resumenPorDia[dia]">
-    <h4>Resumen de {{ dia }}</h4>
-    <ul>
-      <li><strong>Calorías:</strong> {{ resumenPorDia[dia].calorias }} kcal</li>
-      <li><strong>Proteínas:</strong> {{ resumenPorDia[dia].proteinas }} g</li>
-      <li><strong>Grasas:</strong> {{ resumenPorDia[dia].grasas }} g</li>
-      <li><strong>Hidratos:</strong> {{ resumenPorDia[dia].hidratos }} g</li>
-    </ul>
-  </div>
-</div>
 
-    <button class="boton-franja" (click)="agregarFranja()">➕ Añadir franja horaria</button>
+    <!-- Resúmenes diarios -->
+    <div *ngFor="let dia of dias">
+      <div class="resumen-dia" *ngIf="mostrarResumenDia[dia] && resumenPorDia[dia]">
+        <h4>Resumen de {{ dia }}</h4>
+        <ul>
+          <li><strong>Calorías:</strong> {{ resumenPorDia[dia].calorias }} kcal</li>
+          <li><strong>Proteínas:</strong> {{ resumenPorDia[dia].proteinas }} g</li>
+          <li><strong>Grasas:</strong> {{ resumenPorDia[dia].grasas }} g</li>
+          <li><strong>Hidratos:</strong> {{ resumenPorDia[dia].hidratos }} g</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- BOTONES -->
+    <button class="boton-franja" (click)="abrirModalFranja()">➕ Añadir franja horaria</button>
     <button class="boton-resumen" (click)="verResumenSemanal()">📊 Ver resumen semanal</button>
     <button class="boton-duplicar" (click)="mostrarDuplicador = !mostrarDuplicador">📋 Duplicar semana</button>
 
-<div class="duplicador-semana" *ngIf="mostrarDuplicador">
-  <label for="duplicarFecha">📅 Fecha destino:</label>
-  <input type="date" id="duplicarFecha" [(ngModel)]="fechaDuplicar" />
-  <button (click)="ejecutarDuplicado()">✅ Duplicar</button>
-</div>
+    <!-- Duplicador visible -->
+    <div class="duplicador-semana" *ngIf="mostrarDuplicador">
+      <label for="duplicarFecha">📅 Fecha destino:</label>
+      <input type="date" id="duplicarFecha" [(ngModel)]="fechaDuplicar" />
+      <button (click)="ejecutarDuplicado()">✅ Duplicar</button>
+    </div>
 
+    <!-- Historial de semanas -->
+    <button class="boton-historial" (click)="mostrarHistorial = !mostrarHistorial">
+      📅 Ver historial de semanas
+    </button>
 
+    <div class="historial-semanas" *ngIf="mostrarHistorial">
+      <h4>Semanas guardadas</h4>
+      <ul>
+        <li *ngFor="let semana of semanasGuardadas">
+          📆 {{ semana }}
+          <button (click)="cambiarSemanaDesdeHistorial(semana)">📂 Cargar</button>
+          <button (click)="eliminarSemana(semana)">🗑️ Borrar</button>
+        </li>
+      </ul>
+    </div>
 
-<div class="resumen-semanal" *ngIf="mostrarResumenSemanal && resumenSemanal">
-  <h3>Resumen Nutricional Semanal</h3>
-  <ul>
-    <li><strong>Calorías:</strong> {{ resumenSemanal.calorias }} kcal</li>
-    <li><strong>Proteínas:</strong> {{ resumenSemanal.proteinas }} g</li>
-    <li><strong>Grasas:</strong> {{ resumenSemanal.grasas }} g</li>
-    <li><strong>Hidratos:</strong> {{ resumenSemanal.hidratos }} g</li>
-  </ul>
-</div>
-
+    <!-- Resumen semanal -->
+    <div class="resumen-semanal" *ngIf="mostrarResumenSemanal && resumenSemanal">
+      <h3>Resumen Nutricional Semanal</h3>
+      <ul>
+        <li><strong>Calorías:</strong> {{ resumenSemanal.calorias }} kcal</li>
+        <li><strong>Proteínas:</strong> {{ resumenSemanal.proteinas }} g</li>
+        <li><strong>Grasas:</strong> {{ resumenSemanal.grasas }} g</li>
+        <li><strong>Hidratos:</strong> {{ resumenSemanal.hidratos }} g</li>
+      </ul>
+    </div>
   </section>
+
+
 </div>

@@ -6,6 +6,7 @@ import { PlanificacionComponent } from './planificacion.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PlanificadorSemanalComponent } from './planificador-semanal/planificador-semanal.component';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     DragDropModule,
     PlanificacionRoutingModule ,
     PlanificadorSemanalComponent ,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ]
 })
 export class PlanificacionModule { }
