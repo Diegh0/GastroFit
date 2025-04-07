@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Comida } from 'src/app/core/models/comida.model';
 
 @Component({
-  selector: 'app-comidas',
-  templateUrl: './comidas.component.html',
-  styleUrls: ['./comidas.component.scss']
+    selector: 'app-comidas',
+    templateUrl: './comidas.component.html',
+    styleUrls: ['./comidas.component.scss'],
+    standalone: false
 })
 export class ComidasComponent implements OnInit {
   comidas: Comida[] = [];

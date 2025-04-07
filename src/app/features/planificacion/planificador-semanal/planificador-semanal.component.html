@@ -1,33 +1,44 @@
-<div class="planificador-wrapper">
-    <!-- Lista lateral -->
-    <aside class="lista-comidas">
-      <h3>🍽️ Comidas disponibles</h3>
-      <div class="comida-item" *ngFor="let comida of comidasDisponibles">
-        {{ comida.nombre }}
-      </div>
-    </aside>
-  
-    <!-- Calendario semanal -->
-    <section class="calendario">
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th *ngFor="let dia of diasSemana">{{ dia }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let franja of franjas">
-            <th>{{ franja }}</th>
-            <td *ngFor="let dia of diasSemana">
-              <!-- Aquí se mostrarán comidas arrastradas -->
-              <div class="celda-drop"></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <button (click)="agregarFranja()">➕ Añadir franja horaria</button>
-    </section>
-  </div>
-  
+<div class="contenedor-planificador">
+  <aside
+  class="lista-comidas"
+  cdkDropList
+  id="lista-comidas"
+  [cdkDropListData]="comidasDisponibles"
+  [cdkDropListConnectedTo]="celdasIds" 
+>
+
+    <h3>🍽️ Comidas disponibles</h3>
+    <div *ngFor="let comida of comidasDisponibles" class="comida-item" cdkDrag [cdkDragData]="comida">
+      {{ comida.nombre }}
+    </div>
+  </aside>
+
+  <section class="calendario" cdkDropListGroup>
+    <table class="tabla-calendario">
+      <thead>
+        <tr>
+          <th></th>
+          <th *ngFor="let dia of dias">{{ dia }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let franja of franjas">
+          <th>{{ franja }}</th>
+          <td *ngFor="let dia of dias">
+            <div class="celda-drop" [id]="'celda-' + dia + '-' + franja" cdkDropList
+              [cdkDropListData]="planificacion[franja][dia]"
+              [cdkDropListConnectedTo]="['lista-comidas']"
+              (cdkDropListDropped)="onDrop($event, dia, franja)">
+              <div *ngFor="let comida of planificacion[franja][dia]; let i = index" class="comida-drop">
+                {{ comida.nombre }}
+                <button class="btn-delete" (click)="eliminarComida(dia, franja, i)">❌</button>
+              </div>
+              
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="boton-franja" (click)="agregarFranja()">➕ Añadir franja horaria</button>
+  </section>
+</div>

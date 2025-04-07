@@ -6,10 +6,12 @@ describe('PlanificadorSemanalComponent', () => {
   let component: PlanificadorSemanalComponent;
   let fixture: ComponentFixture<PlanificadorSemanalComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [PlanificadorSemanalComponent]
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [PlanificadorSemanalComponent]
+    })
+    .compileComponents();
+
     fixture = TestBed.createComponent(PlanificadorSemanalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

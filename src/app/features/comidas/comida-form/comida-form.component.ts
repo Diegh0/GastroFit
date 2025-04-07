@@ -4,9 +4,10 @@ import { Comida, Ingrediente } from 'src/app/core/models/comida.model';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
-  selector: 'app-comida-form',
-  templateUrl: './comida-form.component.html',
-  styleUrls: ['./comida-form.component.scss']
+    selector: 'app-comida-form',
+    templateUrl: './comida-form.component.html',
+    styleUrls: ['./comida-form.component.scss'],
+    standalone: false
 })
 export class ComidaFormComponent {
   @Output() nuevaComida = new EventEmitter<Comida>();

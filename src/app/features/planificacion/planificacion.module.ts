@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { PlanificacionRoutingModule } from './planificacion-routing.module';
 import { PlanificacionComponent } from './planificacion.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PlanificadorSemanalComponent } from './planificador-semanal/planificador-semanal.component';
 
 
 @NgModule({
   declarations: [
     PlanificacionComponent,
-    PlanificadorSemanalComponent
   ],
   imports: [
     CommonModule,
-    PlanificacionRoutingModule
+    DragDropModule,
+    PlanificacionRoutingModule ,
+    PlanificadorSemanalComponent 
   ]
 })
 export class PlanificacionModule { }

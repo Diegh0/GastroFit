@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Comida } from 'src/app/core/models/comida.model';
 
 @Component({
-  selector: 'app-comida-list',
-  templateUrl: './comida-list.component.html',
-  styleUrls: ['./comida-list.component.scss']
+    selector: 'app-comida-list',
+    templateUrl: './comida-list.component.html',
+    styleUrls: ['./comida-list.component.scss'],
+    standalone: false
 })
 export class ComidaListComponent {
   @Input() comidas: Comida[] = [];
