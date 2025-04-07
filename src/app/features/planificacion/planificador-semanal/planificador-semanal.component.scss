@@ -65,3 +65,49 @@
   font-size: 1rem;
   cursor: pointer;
 }
+.resumen-semanal {
+  margin-top: 1.5rem;
+  background-color: #f4f8f2;
+  border: 1px solid #c6e2b3;
+  padding: 1rem;
+  border-radius: 8px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      margin: 0.4rem 0;
+    }
+  }
+  .resumen-dia {
+    background-color: #e8f5e9;
+    border-left: 4px solid #66bb6a;
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+  
+    h4 {
+      margin-bottom: 0.5rem;
+    }
+  
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  
+      li {
+        margin: 0.2rem 0;
+      }
+    }
+  }
+  
+  .btn-resumen-dia {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: 4px;
+  }
+  
+}
+

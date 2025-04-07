@@ -17,7 +17,12 @@ export class PlanificadorSemanalComponent implements OnInit {
   comidasDisponibles: Comida[] = [];
   planificacion: { [franja: string]: { [dia: string]: Comida[] } } = {};
   celdasIds: string[] = [];
+  mostrarResumenSemanal: boolean = false;
+  resumenSemanal: { calorias: number, proteinas: number, grasas: number, hidratos: number } | null = null;
+  resumenPorDia: { [dia: string]: { calorias: number, proteinas: number, grasas: number, hidratos: number } } = {};
+mostrarResumenDia: { [dia: string]: boolean } = {};
 
+  
   constructor(private comidaService: ComidaService) {}
 
   ngOnInit(): void {
@@ -45,7 +50,11 @@ export class PlanificadorSemanalComponent implements OnInit {
   }
   
   
-
+  verResumenSemanal(): void {
+    this.resumenSemanal = this.calcularResumenSemanal();
+    this.mostrarResumenSemanal = true;
+  }
+  
   onDrop(event: CdkDragDrop<Comida[]>, dia: string, franja: string) {
     if (event.previousContainer.id === 'lista-comidas') {
       const comida = { ...event.item.data };
@@ -75,4 +84,68 @@ export class PlanificadorSemanalComponent implements OnInit {
       });
     }
   }
+  calcularResumenSemanal(): { calorias: number, proteinas: number, grasas: number, hidratos: number } {
+    const resumen = {
+      calorias: 0,
+      proteinas: 0,
+      grasas: 0,
+      hidratos: 0
+    };
+  
+    for (const franja of this.franjas) {
+      for (const dia of this.dias) {
+        const comidas = this.planificacion[franja][dia];
+        for (const comida of comidas) {
+          for (const ing of comida.ingredientes) {
+            const factor = ing.gramos / 100;
+            resumen.calorias += ing.caloriasPor100g * factor;
+            resumen.proteinas += ing.proteinas * factor;
+            resumen.grasas += ing.grasas * factor;
+            resumen.hidratos += ing.hidratos * factor;
+          }
+        }
+      }
+    }
+  
+    // Redondear valores
+    return {
+      calorias: Math.round(resumen.calorias),
+      proteinas: Math.round(resumen.proteinas),
+      grasas: Math.round(resumen.grasas),
+      hidratos: Math.round(resumen.hidratos)
+    };
+  }
+
+  calcularResumenPorDia(dia: string): void {
+    const resumen = {
+      calorias: 0,
+      proteinas: 0,
+      grasas: 0,
+      hidratos: 0
+    };
+  
+    for (const franja of this.franjas) {
+      const comidas = this.planificacion[franja][dia];
+      for (const comida of comidas) {
+        for (const ing of comida.ingredientes) {
+          const factor = ing.gramos / 100;
+          resumen.calorias += ing.caloriasPor100g * factor;
+          resumen.proteinas += ing.proteinas * factor;
+          resumen.grasas += ing.grasas * factor;
+          resumen.hidratos += ing.hidratos * factor;
+        }
+      }
+    }
+  
+    this.resumenPorDia[dia] = {
+      calorias: Math.round(resumen.calorias),
+      proteinas: Math.round(resumen.proteinas),
+      grasas: Math.round(resumen.grasas),
+      hidratos: Math.round(resumen.hidratos)
+    };
+  
+    this.mostrarResumenDia[dia] = !this.mostrarResumenDia[dia]; // Toggle
+  }
+  
+  
 }

@@ -18,7 +18,12 @@
       <thead>
         <tr>
           <th></th>
-          <th *ngFor="let dia of dias">{{ dia }}</th>
+          <!-- <th *ngFor="let dia of dias">{{ dia }}</th> -->
+          <th *ngFor="let dia of dias">
+            {{ dia }}
+            <button class="btn-resumen-dia" (click)="calcularResumenPorDia(dia)">📋</button>
+          </th>
+          
         </tr>
       </thead>
       <tbody>
@@ -39,6 +44,31 @@
         </tr>
       </tbody>
     </table>
+    <!-- Resúmenes diarios -->
+<div *ngFor="let dia of dias">
+  <div class="resumen-dia" *ngIf="mostrarResumenDia[dia] && resumenPorDia[dia]">
+    <h4>Resumen de {{ dia }}</h4>
+    <ul>
+      <li><strong>Calorías:</strong> {{ resumenPorDia[dia].calorias }} kcal</li>
+      <li><strong>Proteínas:</strong> {{ resumenPorDia[dia].proteinas }} g</li>
+      <li><strong>Grasas:</strong> {{ resumenPorDia[dia].grasas }} g</li>
+      <li><strong>Hidratos:</strong> {{ resumenPorDia[dia].hidratos }} g</li>
+    </ul>
+  </div>
+</div>
+
     <button class="boton-franja" (click)="agregarFranja()">➕ Añadir franja horaria</button>
+    <button class="boton-resumen" (click)="verResumenSemanal()">📊 Ver resumen semanal</button>
+
+<div class="resumen-semanal" *ngIf="mostrarResumenSemanal && resumenSemanal">
+  <h3>Resumen Nutricional Semanal</h3>
+  <ul>
+    <li><strong>Calorías:</strong> {{ resumenSemanal.calorias }} kcal</li>
+    <li><strong>Proteínas:</strong> {{ resumenSemanal.proteinas }} g</li>
+    <li><strong>Grasas:</strong> {{ resumenSemanal.grasas }} g</li>
+    <li><strong>Hidratos:</strong> {{ resumenSemanal.hidratos }} g</li>
+  </ul>
+</div>
+
   </section>
 </div>
