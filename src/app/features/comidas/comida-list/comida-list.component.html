@@ -1,9 +1,11 @@
 <div class="grid-comidas">
   <div class="comida-card" *ngFor="let comida of comidas">
-    <a [routerLink]="['/comidas', comida.id]" class="comida-card-link">
+    
 
     <div class="imagen-wrapper">
+      <a [routerLink]="['/comidas', comida.id]" class="comida-card-link">
       <img [src]="comida.imagenUrl || 'assets/no-image.png'" alt="Imagen de la comida" />
+      </a>
       <button class="estrella" (click)="toggleFavorito(comida)">
         {{ comida.favorita ? '⭐' : '☆' }}
       </button>
@@ -18,7 +20,7 @@
         <button class="papelera" (click)="eliminarComida(comida)" title="Eliminar comida">🗑️</button>
       </div>
     </div>
-    </a>
+    
   </div>
 
 </div>

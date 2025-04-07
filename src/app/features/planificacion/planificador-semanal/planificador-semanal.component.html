@@ -28,6 +28,7 @@
         type="date"
         [value]="fechaSemana"
         (change)="cambiarSemana($event)"
+        class="boton-outlined"
       />
     </div>
 
@@ -38,7 +39,7 @@
           <th></th>
           <th *ngFor="let dia of dias">
             {{ dia }}
-            <button class="btn-resumen-dia" (click)="calcularResumenPorDia(dia)">
+            <button class="boton-icono" (click)="calcularResumenPorDia(dia)">
               📋
             </button>
           </th>
@@ -85,9 +86,14 @@
     </div>
 
     <!-- BOTONES -->
-    <button class="boton-franja" (click)="abrirModalFranja()">➕ Añadir franja horaria</button>
-    <button class="boton-resumen" (click)="verResumenSemanal()">📊 Ver resumen semanal</button>
-    <button class="boton-duplicar" (click)="mostrarDuplicador = !mostrarDuplicador">📋 Duplicar semana</button>
+     <div class="botonera">
+      <button class="boton-outlined" (click)="abrirModalFranja()">➕ Añadir franja horaria</button>
+      <button class="boton-accent" (click)="verResumenSemanal()">📊 Ver resumen semanal</button>
+      <button class="boton-primario" (click)="mostrarDuplicador = !mostrarDuplicador">📋 Duplicar semana</button>
+      <button class="boton-outlined" (click)="mostrarHistorial = !mostrarHistorial">📅 Ver historial de semanas</button>
+     </div>
+   
+    
 
     <!-- Duplicador visible -->
     <div class="duplicador-semana" *ngIf="mostrarDuplicador">
@@ -97,9 +103,7 @@
     </div>
 
     <!-- Historial de semanas -->
-    <button class="boton-historial" (click)="mostrarHistorial = !mostrarHistorial">
-      📅 Ver historial de semanas
-    </button>
+  
 
     <div class="historial-semanas" *ngIf="mostrarHistorial">
       <h4>Semanas guardadas</h4>

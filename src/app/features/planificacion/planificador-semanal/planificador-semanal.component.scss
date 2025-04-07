@@ -79,110 +79,117 @@
       margin: 0.4rem 0;
     }
   }
-  .resumen-dia {
-    background-color: #e8f5e9;
-    border-left: 4px solid #66bb6a;
-    margin-top: 1rem;
-    padding: 0.8rem 1rem;
-    border-radius: 5px;
-  
-    h4 {
-      margin-bottom: 0.5rem;
-    }
-  
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-  
-      li {
-        margin: 0.2rem 0;
-      }
-    }
+}
+
+.resumen-dia {
+  background-color: #e8f5e9;
+  border-left: 4px solid #66bb6a;
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 5px;
+
+  h4 {
+    margin-bottom: 0.5rem;
   }
-  
-  .btn-resumen-dia {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    margin-left: 4px;
-  }
-  .selector-semana {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  
-    input[type="date"] {
-      padding: 4px 8px;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin: 0.2rem 0;
     }
   }
-  .boton-duplicar {
-    margin-left: 1rem;
-    background-color: #e3f2fd;
-    border: 1px solid #90caf9;
-    padding: 6px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-  
-    &:hover {
-      background-color: #bbdefb;
-    }
-  }
-  .duplicador-semana {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: #f3f3f3;
+}
+
+.btn-resumen-dia {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-left: 4px;
+}
+
+.selector-semana {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  input[type="date"] {
+    padding: 4px 8px;
+    font-size: 1rem;
+    border-radius: 6px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-  
-    input {
-      margin-right: 0.5rem;
+  }
+}
+
+.boton-duplicar {
+  margin-left: 1rem;
+  background-color: #e3f2fd;
+  border: 1px solid #90caf9;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #bbdefb;
+  }
+}
+
+.duplicador-semana {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  input {
+    margin-right: 0.5rem;
+  }
+}
+
+.historial-semanas {
+  margin-top: 1rem;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button {
+      font-size: 0.9rem;
     }
   }
-  .historial-semanas {
-    margin-top: 1rem;
-    background: #f9f9f9;
-    padding: 1rem;
-    border-radius: 8px;
-  
-    ul {
-      list-style: none;
-      padding: 0;
-  
-      li {
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-  
-      button {
-        font-size: 0.9rem;
-      }
-    }
-  }
-  .confirmar {
-    background-color: #a5d6a7;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .cancelar {
-    background-color: #ef9a9a;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-  }
-  ///////////////////////
-  /* === MODAL GENERAL === */
+}
+
+.confirmar {
+  background-color: #a5d6a7;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.cancelar {
+  background-color: #ef9a9a;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+/* === MODAL GENERAL === */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -245,7 +252,76 @@
   }
 }
 
+/* === BOTONES GLOBALES === */
+
+.boton-primario {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 15px;
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+.boton-accent {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
   
+  &:hover {
+    background-color: #1976d2;
+  }
+}
+
+.boton-outlined {
+  background: transparent;
+  color: #333;
+  border: 1px solid #aaa;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #eee;
+  }
+}
+
+.boton-icono {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+  }
+  .botonera {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; /* Ajusta la separación entre botones */
+    margin-top: 1rem;
+  }
+  .botonera button {
+    min-width: 160px;
+  }
   
 }
+
+  
+
 
