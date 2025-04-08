@@ -6,9 +6,7 @@
       <a [routerLink]="['/comidas', comida.id]" class="comida-card-link">
       <img [src]="comida.imagenUrl || 'assets/no-image.png'" alt="Imagen de la comida" />
       </a>
-      <button class="estrella" (click)="toggleFavorito(comida)">
-        {{ comida.favorita ? '⭐' : '☆' }}
-      </button>
+      
       
     </div>
     <div class="contenido">
@@ -19,8 +17,11 @@
       <div class="acciones">
         <button class="papelera" (click)="eliminarComida(comida)" title="Eliminar comida">🗑️</button>
       </div>
+      <button class="estrella" (click)="toggleFavorito(comida)">
+        {{ comida.favorita ? '⭐' : '☆' }}
+      </button>
     </div>
-    
+   
   </div>
 
 </div>

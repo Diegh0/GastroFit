@@ -1,8 +1,13 @@
-<nav class="menu"> 
+<nav class="menu">
   <a [routerLink]="['']" class="comida-card-link">
     <div class="logo">🥗 Planificador Saludable</div>
   </a>
-  <div class="nav-links">
+
+  <!-- Botón hamburguesa visible solo en móvil -->
+  <button class="menu-toggle" (click)="menuAbierto = !menuAbierto">☰</button>
+
+  <!-- Menú de navegación -->
+  <div class="nav-links" [ngClass]="{ open: menuAbierto }">
     <a routerLink="/comidas" routerLinkActive="active">Comidas</a>
     <a routerLink="/planificacion" routerLinkActive="active">Planificación</a>
   </div>

@@ -58,6 +58,7 @@ button {
     background: #388e3c;
   }
 }
+
 .campo {
   display: flex;
   flex-direction: column;
@@ -75,7 +76,34 @@ button {
     border-radius: 6px;
   }
 }
-.btn-guardar{
+
+.btn-guardar {
   margin-top: 10px;
 }
 
+@media (max-width: 768px) {
+  .card-form {
+    padding: 1rem;
+  }
+
+  .ingrediente-card {
+    grid-template-columns: 1fr;
+  }
+
+  .preview {
+    max-width: 100%;
+  }
+
+  button, input {
+    font-size: 1rem;
+  }
+
+  h2, h3 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .btn-guardar {
+    width: 100%;
+  }
+}

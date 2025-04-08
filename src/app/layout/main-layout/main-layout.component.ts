@@ -7,5 +7,15 @@ import { Component } from '@angular/core';
     standalone: false
 })
 export class MainLayoutComponent {
+    menuAbierto = false;
 
+    toggleMenu(): void {
+      this.menuAbierto = !this.menuAbierto;
+    }
+    
+    cerrarMenu(): void {
+      this.menuAbierto = false;
+    }
+    
+      
 }

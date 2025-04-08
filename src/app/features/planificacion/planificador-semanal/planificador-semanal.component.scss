@@ -321,6 +321,83 @@
   }
   
 }
+@media (max-width: 768px) {
+  .contenedor-planificador {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .lista-comidas {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .tabla-calendario {
+    font-size: 0.75rem;
+    display: block;
+    overflow-x: auto;
+  }
+
+  .tabla-calendario thead,
+  .tabla-calendario tbody,
+  .tabla-calendario th,
+  .tabla-calendario td {
+    white-space: nowrap;
+  }
+
+  .tabla-calendario th,
+  .tabla-calendario td {
+    padding: 0.4rem;
+  }
+
+  .celda-drop {
+    min-height: 40px;
+  }
+
+  .comida-drop {
+    font-size: 0.85rem;
+  }
+
+  .selector-semana {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .botonera {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .botonera button {
+    width: 100%;
+  }
+
+  .resumen-dia,
+  .resumen-semanal,
+  .duplicador-semana,
+  .historial-semanas {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .historial-semanas ul li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .modal .modal-botones {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .modal .modal-botones button {
+    width: 100%;
+  }
+}
+
 
   
 
