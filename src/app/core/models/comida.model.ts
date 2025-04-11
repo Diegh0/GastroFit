@@ -7,7 +7,7 @@ export interface Ingrediente {
   hidratos: number;
 }
   export interface Comida {
-    id: string;
+    id?: string;
     nombre: string;
     ingredientes: Ingrediente[];
     imagenUrl?: string;

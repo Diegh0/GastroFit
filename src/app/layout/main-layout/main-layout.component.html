@@ -4,13 +4,39 @@
   </a>
 
   <!-- Botón hamburguesa visible solo en móvil -->
-  <button class="menu-toggle" (click)="menuAbierto = !menuAbierto">☰</button>
+  <button class="menu-toggle" (click)="toggleMenu()">☰</button>
 
   <!-- Menú de navegación -->
   <div class="nav-links" [ngClass]="{ open: menuAbierto }">
-    <a routerLink="/comidas" routerLinkActive="active">Comidas</a>
-    <a routerLink="/planificacion" routerLinkActive="active">Planificación</a>
+    <ng-container *ngIf="user$ | async as user; else noSesion">
+      <a routerLink="/comidas" routerLinkActive="active" (click)="cerrarMenu()">Comidas</a>
+      <a routerLink="/planificacion" routerLinkActive="active" (click)="cerrarMenu()">Planificación</a>
+    </ng-container>
+
+    <ng-template #noSesion>
+      <a routerLink="/auth" routerLinkActive="active" (click)="cerrarMenu()">Iniciar sesión</a>
+    </ng-template>
   </div>
+  <ng-container *ngIf="user$ | async as user">
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" class="avatar-btn">
+      <span class="avatar-circle">{{ user.email?.[0] | uppercase }}</span>
+    </button>
+  
+    <mat-menu #userMenu="matMenu" class="user-menu" [overlapTrigger]="false">
+      <div class="menu-content">
+        <div class="avatar-wrapper">
+          <div class="avatar-large">
+            {{ user.email?.[0] | uppercase }}
+          </div>
+        </div>
+        <p class="user-email">{{ user.email }}</p>
+        <button mat-raised-button color="primary" (click)="logout()">Cerrar sesión</button>
+      </div>
+    </mat-menu>
+    
+    
+  </ng-container>
+  
 </nav>
 
 <main class="contenido">

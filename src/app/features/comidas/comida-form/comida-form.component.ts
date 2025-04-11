@@ -1,20 +1,20 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Comida, Ingrediente } from 'src/app/core/models/comida.model';
-import { v4 as uuidv4 } from 'uuid';
+import { Comida } from 'src/app/core/models/comida.model';
 
 @Component({
-    selector: 'app-comida-form',
-    templateUrl: './comida-form.component.html',
-    styleUrls: ['./comida-form.component.scss'],
-    standalone: false
+  selector: 'app-comida-form',
+  templateUrl: './comida-form.component.html',
+  styleUrls: ['./comida-form.component.scss'],
+  standalone: false
 })
 export class ComidaFormComponent {
-  @Output() nuevaComida = new EventEmitter<Comida>();
   form: FormGroup;
   imagenPreview: string | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+  ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
       imagenUrl: [''],
@@ -64,7 +64,6 @@ export class ComidaFormComponent {
     if (this.form.invalid) return;
 
     const nuevaComida: Comida = {
-      id: uuidv4(),
       nombre: this.form.value.nombre,
       ingredientes: this.form.value.ingredientes,
       imagenUrl: this.form.value.imagenUrl,
@@ -72,10 +71,6 @@ export class ComidaFormComponent {
       fechaCreacion: new Date()
     };
 
-    this.nuevaComida.emit(nuevaComida);
-    this.form.reset();
-    this.imagenPreview = null;
-    this.ingredientes.clear();
-    this.agregarIngrediente();
+    
   }
 }
