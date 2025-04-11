@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comida } from 'src/app/core/models/comida.model';
+import { ComidaService } from 'src/app/core/services/comida.service';
 
 @Component({
   selector: 'app-comida-form',
@@ -13,7 +14,7 @@ export class ComidaFormComponent {
   imagenPreview: string | null = null;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: FormBuilder, private comidaService: ComidaService
   ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
@@ -27,6 +28,7 @@ export class ComidaFormComponent {
   get ingredientes(): FormArray {
     return this.form.get('ingredientes') as FormArray;
   }
+  
 
   crearIngredienteForm(): FormGroup {
     return this.fb.group({
@@ -62,15 +64,23 @@ export class ComidaFormComponent {
 
   guardar(): void {
     if (this.form.invalid) return;
-
+  
     const nuevaComida: Comida = {
+      id: crypto.randomUUID(), // o 'uuid()' si prefieres
       nombre: this.form.value.nombre,
       ingredientes: this.form.value.ingredientes,
       imagenUrl: this.form.value.imagenUrl,
       favorita: false,
       fechaCreacion: new Date()
     };
-
-    
+  
+    this.comidaService.getComidas().then(comidas => {
+      const nuevas = [...comidas, nuevaComida];
+      this.comidaService.setComidas(nuevas).then(() => {
+        console.log('Comida guardada correctamente');
+        this.form.reset(); // opcional
+        this.imagenPreview = null;
+      });
+    });
   }
 }

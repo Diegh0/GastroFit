@@ -50,7 +50,7 @@ export class AuthComponent {
 
   login() {
     this.auth.login(this.email, this.password)
-      .then(() => this.router.navigate(['/planificacion']))
+      .then(() => this.router.navigate(['/home']))
       .catch(err => alert('Error: ' + err.message));
   }
 
