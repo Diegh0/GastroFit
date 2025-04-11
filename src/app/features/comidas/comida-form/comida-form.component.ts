@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comida } from 'src/app/core/models/comida.model';
 import { ComidaService } from 'src/app/core/services/comida.service';
@@ -12,6 +12,7 @@ import { ComidaService } from 'src/app/core/services/comida.service';
 export class ComidaFormComponent {
   form: FormGroup;
   imagenPreview: string | null = null;
+  @Output() comidaGuardada = new EventEmitter<Comida>(); // 👈
 
   constructor(
     private fb: FormBuilder, private comidaService: ComidaService
@@ -80,6 +81,11 @@ export class ComidaFormComponent {
         console.log('Comida guardada correctamente');
         this.form.reset(); // opcional
         this.imagenPreview = null;
+        this.comidaGuardada.emit(nuevaComida); // 👈 Emitir la comida recién creada
+
+        this.ingredientes.clear();
+        this.agregarIngrediente(); 
+
       });
     });
   }

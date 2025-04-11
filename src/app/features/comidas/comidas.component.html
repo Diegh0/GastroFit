@@ -1,5 +1,5 @@
 <section class="contenedor-comidas">
-    <app-comida-form></app-comida-form>
+  <app-comida-form (comidaGuardada)="agregarComida($event)"></app-comida-form>
      
     <div class="filtro-favoritos">
       <label class="switch">

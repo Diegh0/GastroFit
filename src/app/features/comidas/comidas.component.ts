@@ -22,6 +22,7 @@ export class ComidasComponent implements OnInit {
   
 
   agregarComida(nueva: Comida): void {
+    this.comidas.push(nueva); // 👈 Añadir sin recargar
   }
 
   toggleFavorito(comida: Comida): void {
