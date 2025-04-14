@@ -14,5 +14,11 @@ export interface Ingrediente {
     favorita: boolean;
     fechaCreacion: Date;
   }
-  
+
+export interface PlanificacionSemanal {
+  [franja: string]: {
+    [dia: string]: Comida[];
+  };
+}
+
   

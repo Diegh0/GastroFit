@@ -31,22 +31,8 @@ export class AuthComponent {
 
   toggle() {
     this.showRegister = !this.showRegister;
-    if (this.isMobile) {
-      // Forzar animación con clases temporales
-      const front = document.querySelector('.front') as HTMLElement;
-      const back = document.querySelector('.back') as HTMLElement;
-  
-      if (this.showRegister) {
-        front?.classList.remove('visible');
-        back?.classList.add('fade-in');
-        setTimeout(() => back?.classList.remove('fade-in'), 500);
-      } else {
-        back?.classList.remove('visible');
-        front?.classList.add('fade-in');
-        setTimeout(() => front?.classList.remove('fade-in'), 500);
-      }
-    }
   }
+  
 
   login() {
     this.auth.login(this.email, this.password)

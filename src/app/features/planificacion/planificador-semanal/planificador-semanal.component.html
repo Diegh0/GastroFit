@@ -126,7 +126,19 @@
         <li><strong>Hidratos:</strong> {{ resumenSemanal.hidratos }} g</li>
       </ul>
     </div>
+    <!-- Modal para añadir franja -->
+<div *ngIf="mostrarModalFranja" class="modal-franja">
+  <h3>Nombre de la nueva franja horaria</h3>
+  <input [(ngModel)]="nombreNuevaFranja" placeholder="Ej. Almuerzo" />
+  <button (click)="confirmarAgregarFranja()">Añadir</button>
+  <button (click)="mostrarModalFranja = false">Cancelar</button>
+</div>
+
   </section>
+<!-- Mensaje de confirmación -->
+<div class="mensaje-confirmacion" *ngIf="mostrarMensaje">
+  {{ mensajeConfirmacion }}
+</div>
 
 
 </div>
