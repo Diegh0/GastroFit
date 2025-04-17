@@ -1,129 +1,80 @@
-.auth-scene {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(135deg, #8e9eab, #eef2f3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 1000px;
-    overflow: hidden;
+/* auth.component.scss */
+
+/* Contenedor principal del formulario */
+.auth-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título del formulario */
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Ajustes para formularios y campos */
+.full-width {
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+/* Forzar que los mat-form-field ocupen el 100% del contenedor */
+mat-form-field.full-width {
+  width: 100%;
+}
+
+/* Botón de envío */
+button.full-width {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 150ms ease-in-out;
+}
+
+/* Enlace para alternar entre login y registro */
+.toggle-link {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Estilo para el enlace */
+.toggle-link a {
+  font-size: 0.9rem;
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 200ms ease-in-out;
+}
+
+/* Hover para el enlace */
+.toggle-link a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+/* Ajustes responsivos para dispositivos móviles */
+@media (max-width: 480px) {
+  .auth-container {
+    margin: 1rem;
+    padding: 1.5rem;
   }
-  
-  .auth-card {
-    position: relative;
-    width: 100%;
-    max-width: 420px;
-    height: auto;
-    min-height: 400px;
-    transform-style: preserve-3d;
-    transition: transform 0.8s ease;
+  .title {
+    font-size: 1.5rem;
   }
-  
-  .auth-card.flipped {
-    transform: rotateY(180deg);
+  button.full-width {
+    padding: 0.65rem;
+    font-size: 0.95rem;
   }
-  
-  .auth-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    padding: 2.5rem;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transition: 0.4s ease all;
-  }
-  
-  .front {
-    transform: rotateY(0deg);
-    z-index: 2;
-  }
-  
-  .back {
-    transform: rotateY(180deg);
-    z-index: 1;
-  }
-  
-  /* 🌐 MODO MÓVIL: animación tipo fadeSlide */
-  @media (max-width: 768px) {
-    .auth-scene {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #8e9eab, #eef2f3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-inline: 1rem; // 👈 margen izquierdo y derecho igual
-      overflow: hidden;
-    }
-  
-    .auth-card {
-      transform: none !important;
-      width: 100%;
-      max-width: 100%;
-    }
-  
-    .auth-face {
-        width: clamp(300px, 90vw, 500px);
-        max-width: 500px; // 👈 define un límite visual
-      margin: 0 auto;
-      padding: 2.5rem;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      backface-visibility: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      transition: 0.4s ease all;
-    }
-  
-    .auth-face.visible {
-      position: relative;
-      opacity: 1;
-      animation: fadeSlide 0.5s ease-out;
-      z-index: 2;
-    }
-  
-    .auth-face.fade-in {
-      animation: fadeSlide 0.5s ease-out;
-    }
-  }
-  
-  
-  
-  @keyframes fadeSlide {
-    from {
-      transform: translateY(30px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  /* utilidades */
-  .full-width {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-  
-  .switch {
-    text-align: center;
-    margin-top: 1.2rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-  
-    span {
-      color: #3f51b5;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-  }
-  
-  
+}

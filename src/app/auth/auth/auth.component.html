@@ -1,50 +1,50 @@
-<div class="auth-scene"  [class.mobile]="isMobile">
-    <div class="auth-card" [class.flipped]="showRegister && !isMobile">
-      
-      <!-- Cara frontal: Login -->
-      <div class="auth-face front"  *ngIf="!showRegister || (!isMobile && !showRegister)"
-      [class.visible]="!showRegister">
-        <h2>Iniciar Sesión</h2>
-        <form (ngSubmit)="login()">
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="email" name="email" required />
-          </mat-form-field>
-  
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Contraseña</mat-label>
-            <input matInput type="password" [(ngModel)]="password" name="password" required />
-          </mat-form-field>
-  
-          <button mat-flat-button color="primary" class="full-width" type="submit">Entrar</button>
-          <p class="switch" (click)="toggle()">¿No tienes cuenta? <span>Regístrate</span></p>
-        </form>
-      </div>
-  
-      <!-- Cara trasera: Registro -->
-      <div class="auth-face back" *ngIf="showRegister || (!isMobile && showRegister)"
-      [class.visible]="showRegister">
-        <h2>Registro</h2>
-        <form (ngSubmit)="register()">
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="email" name="email" required />
-          </mat-form-field>
-  
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Contraseña</mat-label>
-            <input matInput type="password" [(ngModel)]="password" name="password" required />
-          </mat-form-field>
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Contraseña</mat-label>
-            <input matInput type="password" [(ngModel)]="password" name="password" required />
-          </mat-form-field>
-  
-          <button mat-flat-button color="accent" class="full-width" type="submit">Registrarse</button>
-          <p class="switch" (click)="toggle()">¿Ya tienes cuenta? <span>Inicia sesión</span></p>
-        </form>
-      </div>
-  
+<div class="auth-container" [@pageLoad]>
+  <h2 class="title">{{ showRegister ? 'Registro' : 'Inicio de Sesión' }}</h2>
+  <form (ngSubmit)="showRegister ? register() : login()">
+    <!-- Campo para el correo electrónico -->
+    <mat-form-field appearance="outline" class="full-width">
+      <input
+        matInput
+        placeholder="Correo electrónico"
+        [(ngModel)]="email"
+        name="email"
+        required>
+    </mat-form-field>
+
+    <!-- Campo para la contraseña -->
+    <mat-form-field appearance="outline" class="full-width">
+      <input
+        matInput
+        type="password"
+        placeholder="Contraseña"
+        [(ngModel)]="password"
+        name="password"
+        required>
+    </mat-form-field>
+
+    <!-- Campo para confirmar contraseña (solo en registro) -->
+    <div *ngIf="showRegister" [@toggleAnimation]>
+      <mat-form-field appearance="outline" class="full-width">
+        <input
+          matInput
+          type="password"
+          placeholder="Confirmar Contraseña"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          required>
+      </mat-form-field>
     </div>
+
+    <!-- Botón de envío -->
+    <button mat-raised-button color="primary" type="submit" class="full-width">
+      {{ showRegister ? 'Registrarse' : 'Iniciar Sesión' }}
+    </button>
+  </form>
+
+  <!-- Enlace para alternar entre login y registro -->
+  <div class="toggle-link">
+    <a (click)="toggle()" style="cursor: pointer;">
+      {{ showRegister ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate' }}
+    </a>
   </div>
-  
+</div>
