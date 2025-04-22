@@ -13,12 +13,20 @@ export interface Ingrediente {
     imagenUrl?: string;
     favorita: boolean;
     fechaCreacion: Date;
+    asin?:string;
   }
 
 export interface PlanificacionSemanal {
   [franja: string]: {
     [dia: string]: Comida[];
   };
+  
+}
+export interface AfiliadoProducto {
+  title: string;
+  asin: string;
+  imageUrl: string;
+  link:string;
 }
 
   

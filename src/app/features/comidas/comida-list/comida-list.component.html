@@ -1,3 +1,4 @@
+<!-- Carrusel de afiliados -->
 <div class="grid-comidas">
   <div class="comida-card" *ngFor="let comida of comidas">
     
@@ -23,5 +24,26 @@
     </div>
    
   </div>
-
 </div>
+<section class="affiliate-section">
+  <h3>Recomendaciones para tu cocina 🔥</h3>
+  <div class="affiliate-carousel">
+    <div *ngFor="let prod of affiliateProducts" class="affiliate-card">
+      <a
+        [href]="prod.link"
+        target="_blank"
+        rel="noopener"
+        class="card-link"
+      >
+        <div class="card-image-wrapper">
+          <img [src]="prod.imageUrl" [alt]="prod.title" />
+        </div>
+        <div class="card-content">
+          <h4>{{ prod.title }}</h4>
+          <button class="btn-compra">¡Comprar ahora!</button>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
