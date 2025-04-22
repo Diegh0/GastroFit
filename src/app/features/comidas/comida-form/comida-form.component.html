@@ -8,9 +8,13 @@
     </div>
 
     <div class="form-group">
-      <label>Imagen (opcional)</label>
-      <input type="file" (change)="onImagenSeleccionada($event)" />
-      <img *ngIf="imagenPreview" [src]="imagenPreview" class="preview" />
+      <label class="file-label">Imagen (opcional)</label>
+      <div class="file-upload">
+        <input type="file" id="file-input" (change)="onImagenSeleccionada($event)" />
+        <label for="file-input" class="file-button">📸 Seleccionar imagen</label>
+      </div>
+      <img *ngIf="imagenPreview" [src]="imagenPreview"class="preview fade-in"/>
+     
     </div>
 
     <div formArrayName="ingredientes">

@@ -278,6 +278,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  margin-left:20px;
   
   &:hover {
     background-color: #1976d2;
@@ -313,6 +314,7 @@
   .botonera {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 12px; /* Ajusta la separación entre botones */
     margin-top: 1rem;
   }
@@ -366,12 +368,14 @@
 
   .botonera {
     flex-direction: column;
+    align-items: center;
     gap: 0.75rem;
     margin-top: 1rem;
   }
 
   .botonera button {
-    width: 100%;
+    width: 90%;
+    max-width: 300px;
   }
 
   .resumen-dia,
@@ -395,6 +399,14 @@
 
   .modal .modal-botones button {
     width: 100%;
+  }
+  .boton-accent{
+    margin-left:0px;
+    margin-top:10px;
+  }
+  .boton-primario{
+    margin-left:0px;
+    margin-top:10px;
   }
 }
 .mensaje-confirmacion {

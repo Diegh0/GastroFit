@@ -30,7 +30,12 @@ export class ComidaFormComponent {
     return this.form.get('ingredientes') as FormArray;
   }
   
-
+  eliminarImagen() {
+    this.imagenPreview = null;
+    // Opcionalmente, puedes también limpiar el input si quieres:
+    // (document.getElementById('file-input') as HTMLInputElement).value = '';
+  }
+  
   crearIngredienteForm(): FormGroup {
     return this.fb.group({
       nombre: ['', Validators.required],
