@@ -22,6 +22,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
+import { IaComponent } from './pages/ia/ia.component';
+import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 
 
 
@@ -29,7 +31,6 @@ import { CommonModule } from '@angular/common';
   declarations: [
     AppComponent,
     MainLayoutComponent,
-  
   ],
   imports: [
     MaterialModule,
@@ -43,7 +44,7 @@ import { CommonModule } from '@angular/common';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    
+    AngularFireFunctionsModule 
   ]
   ,
   providers: [],

@@ -1,0 +1,69 @@
+.ia-card {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  
+  .ia-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  
+  .ia-actions {
+    grid-column: 1 / -1; /* ocupa todo el ancho */
+    text-align: right;
+  }
+  
+  .ia-result {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
+  /////////////////////////////
+  .ia-loading {
+    text-align: center;
+    margin: 1rem 0;
+  }
+  .ia-error {
+    color: #d32f2f;
+    text-align: center;
+    margin: 1rem 0;
+  }
+  .ia-menu {
+    margin-top: 2rem;
+    h3 {
+      margin-top: 1.5rem;
+      text-transform: capitalize;
+    }
+    .ia-comida {
+      margin-left: 1rem;
+    }
+  }
+  .ia-menu {
+    max-width: 800px;
+    margin: 2rem auto;
+  }
+  
+  .meal-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .meal-card {
+    background: #fafafa;
+  }
+  
+  .macros {
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 0.5rem;
+  }
+  
+  .ingredient-gramos {
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  

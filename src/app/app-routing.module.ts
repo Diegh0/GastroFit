@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard'; // 🔐 Asegúrate de tenerlo creado
+import { IaComponent } from './pages/ia/ia.component';
 
 
 
@@ -31,9 +32,12 @@ const routes: Routes = [
         canActivate: [AuthGuard], // 🔒
         loadChildren: () =>
           import('./features/planificacion/planificacion.module').then(m => m.PlanificacionModule)
-      }
+      },
+      { path: 'ia', component: IaComponent },
+
     ]
   },
+ 
 
   // Fallback
   { path: '**', redirectTo: '' }

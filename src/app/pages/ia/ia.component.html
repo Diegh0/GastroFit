@@ -1,0 +1,105 @@
+<!-- src/app/pages/ia/ia.component.html -->
+<mat-card class="ia-card">
+  <mat-card-title>Calcula tus calorías diarias</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="ia-form">
+      <mat-form-field>
+        <mat-label>Peso (kg)</mat-label>
+        <input matInput type="number" formControlName="peso">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Altura (cm)</mat-label>
+        <input matInput type="number" formControlName="altura">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Edad</mat-label>
+        <input matInput type="number" formControlName="edad">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Sexo</mat-label>
+        <mat-select formControlName="sexo">
+          <mat-option value="M">Hombre</mat-option>
+          <mat-option value="F">Mujer</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Nivel de actividad</mat-label>
+        <mat-select formControlName="nivelActividad">
+          <mat-option *ngFor="let n of nivelesActividad" [value]="n.value">
+            {{ n.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Objetivo</mat-label>
+        <mat-select formControlName="objetivo">
+          <mat-option value="definicion">Definición</mat-option>
+          <mat-option value="mantenimiento">Mantenimiento</mat-option>
+          <mat-option value="volumen">Volumen</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="ia-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+          Calcular
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-footer *ngIf="caloriasRecomendadas !== null" class="ia-result">
+    <p>Tu requerimiento diario: <strong>{{ caloriasRecomendadas }} kcal</strong></p>
+  </mat-card-footer>
+</mat-card>
+
+<div *ngIf="cargando" class="ia-loading">
+  Generando menú… por favor espera.
+</div>
+
+<div *ngIf="error" class="ia-error">
+  {{ error }}
+</div>
+
+<div *ngIf="menu" class="ia-menu">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let dia of daysOfWeek">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ dia }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="meal-types">
+        <mat-card *ngFor="let tipo of mealTypes" class="meal-card">
+          <mat-card-header>
+            <mat-card-title>{{ tipo }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              <strong>{{ menu[dia][tipo].base.nombre }}</strong>
+              — {{ menu[dia][tipo].gramos }} g
+            </p>
+            <p class="macros">
+              {{ menu[dia][tipo].calorias }} kcal •
+              {{ menu[dia][tipo].proteinas }} g P •
+              {{ menu[dia][tipo].grasas }} g G •
+              {{ menu[dia][tipo].carbos }} g C
+            </p>
+            <p>Ingredientes:</p>
+            <mat-list dense>
+              <mat-list-item *ngFor="let ing of menu[dia][tipo].ingredientes">
+                <span mat-line>{{ ing.nombre }}</span>
+                <span mat-line class="ingredient-gramos">{{ ing.gramos }} g</span>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
