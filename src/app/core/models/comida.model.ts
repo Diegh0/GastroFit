@@ -14,6 +14,7 @@ export interface Ingrediente {
     favorita: boolean;
     fechaCreacion: Date;
     asin?:string;
+    source?: 'manual' | 'ia';
   }
 
 export interface PlanificacionSemanal {
@@ -28,5 +29,24 @@ export interface AfiliadoProducto {
   imageUrl: string;
   link:string;
 }
+export interface Recipe {
+  id?:string;
+  nombre: string;
+  tipoComida: 'Desayuno'|'Comida'|'Almuerzo'|'Merienda'|'Cena';
+  caloriasTotales: number;
+  proteinasTotales: number;
+  grasasTotales: number;
+  carbosTotales: number;
+  restricciones: string[];
+  ingredientes: Array<{
+    nombre: string;
+    gramos: number;
+    caloriasPor100g: number;
+    grasasPor100g: number;
+    hidratosPor100g: number;
+    proteinasPor100g: number;
+  }>;
+}
+
 
   

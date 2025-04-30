@@ -31,10 +31,16 @@ export interface Recipe {
   }>;
 }
 
-export interface ScaledIngredient {
+interface ScaledIngredient {
   nombre: string;
   gramos: number;
+  caloriasPor100g: number;
+  proteinas: number;
+  grasas: number;
+  hidratos: number;
 }
+
+
 
 export interface ScaledRecipe {
   base: Recipe;
@@ -187,7 +193,12 @@ export class MealPlanService {
           carbos: receta.carbosTotales,
           ingredientes: receta.ingredientes.map(i => ({
             nombre: i.nombre,
-            gramos: i.gramos
+            gramos: i.gramos,
+            caloriasPor100g: i.caloriasPor100g,
+            proteinas: i.proteinasPor100g,
+            grasas: i.grasasPor100g,
+            hidratos: i.hidratosPor100g
+
           }))
         };
       });

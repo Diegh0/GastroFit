@@ -7,10 +7,12 @@ import {
   setDoc,
   getDocs,
   deleteDoc,
+  collectionData,
 } from '@angular/fire/firestore';
 import { v4 as uuid } from 'uuid';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { switchMap, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +46,15 @@ export class ComidaService {
       )
     );
   }
-
+  getComidasObservable(): Observable<Comida[]> {
+    return this.auth.user$.pipe(
+      switchMap(user => {
+        if (!user) return of([]);
+        const ref = collection(this.firestore, `users/${user.uid}/comidas`);
+        return collectionData(ref, { idField: 'id' }) as Observable<Comida[]>;
+      })
+    );
+  }
   async getComidas(): Promise<Comida[]> {
     if (this.comidas.length) return this.comidas;
 

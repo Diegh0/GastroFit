@@ -2,7 +2,10 @@
     <img [src]="comida.imagenUrl || 'assets/no-image.png'" class="imagen" />
   
     <h2>{{ comida.nombre }} <span *ngIf="comida.favorita">⭐</span></h2>
-  
+    <div *ngIf="comida?.source === 'ia'" class="badge-ia">
+      ⚡ Generada por IA
+    </div>
+    
     <ul class="ingredientes">
       <li *ngFor="let i of comida.ingredientes">
         <strong>{{ i.nombre }}</strong> — {{ i.gramos }}g

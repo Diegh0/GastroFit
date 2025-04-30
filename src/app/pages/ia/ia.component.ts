@@ -25,7 +25,8 @@ import { MealPlanResponse, MealPlanService } from 'src/app/core/services/meal-pl
 import { IaService } from './ia.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule }      from '@angular/material/list';
-
+import { MatIconModule }   from '@angular/material/icon';
+import { IaHistoryService } from 'src/app/core/services/ia-history.service';
 @Component({
   selector: 'app-ia',
   standalone: true,
@@ -38,7 +39,8 @@ import { MatListModule }      from '@angular/material/list';
     MatButtonModule,
     MatCardModule,
     MatExpansionModule,
-    MatListModule
+    MatListModule,
+    MatIconModule
   ],
   templateUrl: './ia.component.html',
   styleUrls: ['./ia.component.scss']
@@ -68,7 +70,7 @@ readonly mealTypes  = ['Desayuno','Almuerzo','Merienda','Cena'] as const;
     { label: 'Volumen',       value: 'volumen'      }
   ] as { label: string; value: Objective }[];
 
-  constructor(private fb: FormBuilder, private mealPlan: MealPlanService)  {
+  constructor(private fb: FormBuilder, private mealPlan: MealPlanService,private iaService: IaHistoryService)  {
     this.form = this.fb.group({
       peso:           [null, [Validators.required, Validators.min(30)]],
       altura:         [null, [Validators.required, Validators.min(100)]],
@@ -107,4 +109,32 @@ readonly mealTypes  = ['Desayuno','Almuerzo','Merienda','Cena'] as const;
       this.cargando = false;
     }
   }
+  onAddToIaHistory(receta: { nombre: string; id: string }, dia: string, tipo: 'Desayuno' | 'Almuerzo' | 'Merienda' | 'Cena') {
+    const recetaCompleta = this.menu?.[dia]?.[tipo];
+    if (!recetaCompleta) return;
+  
+    this.iaService.addIaEntry({
+      dia,
+      tipo,
+      recipeId: receta.id,
+      nombre: receta.nombre,
+      favorita: false,
+      imagenUrl: 'assets/imgPredeterminadaCars.png',
+      ingredientes: recetaCompleta.ingredientes.map(ing => ({
+        nombre: ing.nombre,
+        gramos: ing.gramos,
+        caloriasPor100g: ing.caloriasPor100g,
+        proteinas: ing.proteinas,
+        grasas: ing.grasas,
+        hidratos: ing.hidratos
+      }))      
+      
+    }).then(() => {
+      console.log('Añadido al historial IA');
+    });
+  }
+  
+  
+  
+  
 }

@@ -1,5 +1,7 @@
 // scripts/seed-recipes.ts
 
+import { Recipe } from "src/app/core/services/meal-plan.service";
+
 // Usamos CommonJS para evitar errores de import en ejecución
 // @ts-ignore
 const admin = require('firebase-admin');
@@ -12,23 +14,7 @@ admin.initializeApp({
   projectId: 'gastrofit-app',
 });
 
-interface Recipe {
-  nombre: string;
-  tipoComida: 'Desayuno'|'Comida'|'Almuerzo'|'Merienda'|'Cena';
-  caloriasTotales: number;
-  proteinasTotales: number;
-  grasasTotales: number;
-  carbosTotales: number;
-  restricciones: string[];
-  ingredientes: Array<{
-    nombre: string;
-    gramos: number;
-    caloriasPor100g: number;
-    grasasPor100g: number;
-    hidratosPor100g: number;
-    proteinasPor100g: number;
-  }>;
-}
+
 
 const recipes: Recipe[] = [
   ////////////////////////////////////////////////DESAYUNOS///////////////////////////////////////////////////////

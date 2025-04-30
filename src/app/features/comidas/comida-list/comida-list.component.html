@@ -1,20 +1,19 @@
 <!-- Carrusel de afiliados -->
 <div class="grid-comidas">
   <div class="comida-card" *ngFor="let comida of comidas">
-    
 
     <div class="imagen-wrapper">
       <a [routerLink]="['/comidas', comida.id]" class="comida-card-link">
-      <img [src]="comida.imagenUrl || 'assets/no-image.png'" alt="Imagen de la comida" />
+        <img [src]="comida.imagenUrl || 'assets/imgPredeterminadaCars.png'" alt="Imagen de la comida" />
       </a>
-      
-      
     </div>
+
     <div class="contenido">
       <h3>{{ comida.nombre }}</h3>
-      <p><strong>Ingredientes:</strong> {{ comida.ingredientes.length }}</p>
+      <p><strong>Ingredientes:</strong> {{ comida.ingredientes?.length || 0 }}</p>
+
       <p><strong>Creado:</strong> {{ comida.fechaCreacion | date:'shortDate' }}</p>
-    
+
       <div class="acciones">
         <button class="papelera" (click)="eliminarComida(comida)" title="Eliminar comida">🗑️</button>
       </div>
@@ -22,28 +21,7 @@
         {{ comida.favorita ? '⭐' : '☆' }}
       </button>
     </div>
-   
   </div>
 </div>
-<section class="affiliate-section">
-  <h3>Recomendaciones para tu cocina 🔥</h3>
-  <div class="affiliate-carousel">
-    <div *ngFor="let prod of affiliateProducts" class="affiliate-card">
-      <a
-        [href]="prod.link"
-        target="_blank"
-        rel="noopener"
-        class="card-link"
-      >
-        <div class="card-image-wrapper">
-          <img [src]="prod.imageUrl" [alt]="prod.title" />
-        </div>
-        <div class="card-content">
-          <h4>{{ prod.title }}</h4>
-          <button class="btn-compra">¡Comprar ahora!</button>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
+
 

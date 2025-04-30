@@ -16,6 +16,37 @@
     (favoritoCambiado)="toggleFavorito($event)"
     (comidaEliminada)="eliminarComida($event)">
   </app-comida-list>
+
+  <div *ngIf="comidasIA.length > 0">
+    <h2>🤖 Recomendaciones generadas por la APP</h2>
+    <app-comida-list
+  [comidas]="comidasIA"
+  (comidaEliminada)="eliminarComidaIA($event)"
+  (favoritoCambiado)="toggleFavoritoIA($event)">
+</app-comida-list>
+
+  </div>
   
+  </section>
+  <section class="affiliate-section">
+    <h3>Recomendaciones para tu cocina 🔥</h3>
+    <div class="affiliate-carousel">
+      <div *ngFor="let prod of affiliateProducts" class="affiliate-card">
+        <a
+          [href]="prod.link"
+          target="_blank"
+          rel="noopener"
+          class="card-link"
+        >
+          <div class="card-image-wrapper">
+            <img [src]="prod.imageUrl" [alt]="prod.title" />
+          </div>
+          <div class="card-content">
+            <h4>{{ prod.title }}</h4>
+            <button class="btn-compra">¡Comprar ahora!</button>
+          </div>
+        </a>
+      </div>
+    </div>
   </section>
   
