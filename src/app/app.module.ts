@@ -1,7 +1,7 @@
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { provideFirebaseApp } from '@angular/fire/app';
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { IaComponent } from './pages/ia/ia.component';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -44,7 +45,13 @@ import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    AngularFireFunctionsModule 
+    AngularFireFunctionsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }) 
   ]
   ,
   providers: [],
