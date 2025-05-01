@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { User } from 'firebase/auth';
@@ -11,7 +11,7 @@ import { InstallPromptService } from '../services/install-prompt.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   deferredPrompt: any = null;
   mostrarBotonInstalar = false;
 
@@ -22,30 +22,26 @@ export class HomeComponent {
     private installPromptService: InstallPromptService,
     private authService: AuthService,
     private router: Router
-  ) {
-    this.mostrarBotonInstalar = !!this.installPromptService.getPromptEvent();
-  
-    // Ocultar el botón si la app ya está instalada
+  ) {}
+  ngOnInit(): void {
     const isStandalone =
-  window.matchMedia('(display-mode: standalone)').matches ||
-  (window.navigator as any)['standalone'] === true;
-
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (window.navigator as any)['standalone'] === true;
   
-    if (isStandalone) {
-      this.mostrarBotonInstalar = false;
-    }
+    this.installPromptService.getPromptEvent$().subscribe((event) => {
+      this.mostrarBotonInstalar = !isStandalone && !!event;
+  
+      if (this.mostrarBotonInstalar) {
+        this.mostrarBurbuja = true;
+        setTimeout(() => {
+          this.mostrarBurbuja = false;
+        }, 6000);
+      }
+    });
   
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
-  
-    if (this.mostrarBotonInstalar) {
-      this.mostrarBurbuja = true;
-  
-      setTimeout(() => {
-        this.mostrarBurbuja = false;
-      }, 6000);
-    }
   }
   
   

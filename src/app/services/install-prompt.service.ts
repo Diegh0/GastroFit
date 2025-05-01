@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class InstallPromptService {
-  deferredPrompt: any = null;
+  private deferredPromptSubject = new BehaviorSubject<any>(null);
 
   constructor() {
     window.addEventListener('beforeinstallprompt', (event: Event) => {
       event.preventDefault();
-      this.deferredPrompt = event;
+      this.deferredPromptSubject.next(event);
     });
   }
 
+  getPromptEvent$() {
+    return this.deferredPromptSubject.asObservable();
+  }
+
   getPromptEvent() {
-    return this.deferredPrompt;
+    return this.deferredPromptSubject.getValue();
   }
 
   clearPrompt() {
-    this.deferredPrompt = null;
+    this.deferredPromptSubject.next(null);
   }
 }
