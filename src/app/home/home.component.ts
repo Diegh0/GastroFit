@@ -23,24 +23,31 @@ export class HomeComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    // Mostrar el botón de instalación si el navegador disparó el evento y lo hemos guardado
     this.mostrarBotonInstalar = !!this.installPromptService.getPromptEvent();
-    this.mostrarBotonInstalar = true;
-    // Suscribirse al estado del usuario para mostrar contenido dinámico
+  
+    // Ocultar el botón si la app ya está instalada
+    const isStandalone =
+  window.matchMedia('(display-mode: standalone)').matches ||
+  (window.navigator as any)['standalone'] === true;
+
+  
+    if (isStandalone) {
+      this.mostrarBotonInstalar = false;
+    }
+  
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
+  
     if (this.mostrarBotonInstalar) {
       this.mostrarBurbuja = true;
-    
-      // Oculta la burbuja tras unos segundos
+  
       setTimeout(() => {
         this.mostrarBurbuja = false;
       }, 6000);
     }
-   
-    
   }
+  
   
 
   comenzar() {
