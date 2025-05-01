@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { User } from 'firebase/auth';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +14,26 @@ export class HomeComponent {
   deferredPrompt: any = null;
   mostrarBotonInstalar = false;
 
-  constructor() {
+  user: User | null = null;
+
+  constructor(private authService: AuthService, private router: Router) {
     window.addEventListener('beforeinstallprompt', (event: Event) => {
-      event.preventDefault(); // Evita que el navegador lo muestre automáticamente
+      event.preventDefault();
       this.deferredPrompt = event;
       this.mostrarBotonInstalar = true;
     });
+
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+    });
+  }
+
+  comenzar() {
+    if (this.user) {
+      this.router.navigate(['/planificacion']);
+    } else {
+      this.router.navigate(['/auth']);
+    }
   }
 
   instalarApp() {

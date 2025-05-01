@@ -28,4 +28,8 @@ export class AuthService {
   getUserId(): string | null {
     return this.auth.currentUser?.uid || null;
   }
+  isLoggedIn(): boolean {
+    return this.auth.currentUser !== null;
+  }
+
 }

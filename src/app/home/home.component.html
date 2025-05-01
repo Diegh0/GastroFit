@@ -7,47 +7,52 @@
   </div>
 
   <div class="hero-content">
-    <h1>Tu nutrición, organizada</h1>
-    <p>Planifica tus comidas, controla tus macros y mejora tu alimentación de forma visual y sencilla.</p>
-    <button routerLink="/comidas" class="boton">🍽️ Comenzar</button>
+    <ng-container *ngIf="user; else invitado">
+      <h1>¡Bienvenido de nuevo!</h1>
+      <p>Accede a tu planificación semanal y retoma el control de tus comidas.</p>
+    </ng-container>
+    <ng-template #invitado>
+      <h1>Tu nutrición, organizada</h1>
+      <p>Planifica tus comidas, controla tus macros y mejora tu alimentación de forma visual y sencilla.</p>
+    </ng-template>
+
+    <button (click)="comenzar()" class="boton">🍽️ Comenzar</button>
   </div>
 </section>
 
-  
-  <section class="feature">
-    <div class="content">
-      <h2>🧠 Guarda tus comidas</h2>
-      <p class="texto-explicativo">Agrega tus platos favoritos, incluyendo ingredientes y valores nutricionales.</p>
-    </div>
-  </section>
-  
-  <section class="feature alt">
-    <div class="content">
-      <h2>🗓️ Planifica tu semana</h2>
-      <p class="texto-explicativo">Organiza tus comidas con drag and drop en un calendario intuitivo.</p>
-    </div>
-  </section>
-  
-  <section class="feature">
-    <div class="content">
-      <h2>📊 Obtén tu resumen nutricional</h2>
-      <p class="texto-explicativo">Consulta tus calorías, proteínas, grasas e hidratos día a día o de forma semanal.</p>
-    </div>
-  </section>
-  
-  <section class="feature alt">
-    <div class="content">
-      <h2>📁 Guarda semanas anteriores</h2>
-      <p class="texto-explicativo">Reutiliza o edita semanas ya planificadas, ideal para crear rutinas.</p>
-    </div>
-  </section>
-  
-  <section class="cta">
-    <h2>¿Listo para empezar?</h2>
-        <button routerLink="/planificacion" class="boton">🗓️ Planifica tu semana</button>
-  </section>
-  <div *ngIf="mostrarBotonInstalar" class="instalar-container">
-    <button class="instalar-btn" (click)="instalarApp()">📲 Instalar app</button>
+<section class="feature">
+  <div class="content">
+    <h2>🧠 Guarda tus comidas</h2>
+    <p class="texto-explicativo">Agrega tus platos favoritos, incluyendo ingredientes y valores nutricionales.</p>
   </div>
-  
-  
+</section>
+
+<section class="feature alt">
+  <div class="content">
+    <h2>🗓️ Planifica tu semana</h2>
+    <p class="texto-explicativo">Organiza tus comidas con drag and drop en un calendario intuitivo.</p>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="content">
+    <h2>📊 Obtén tu resumen nutricional</h2>
+    <p class="texto-explicativo">Consulta tus calorías, proteínas, grasas e hidratos día a día o de forma semanal.</p>
+  </div>
+</section>
+
+<section class="feature alt">
+  <div class="content">
+    <h2>📁 Guarda semanas anteriores</h2>
+    <p class="texto-explicativo">Reutiliza o edita semanas ya planificadas, ideal para crear rutinas.</p>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>¿Listo para empezar?</h2>
+  <button (click)="comenzar()" class="boton">🗓️ Planifica tu semana</button>
+</section>
+
+<div *ngIf="mostrarBotonInstalar" class="instalar-container">
+  <button class="instalar-btn" (click)="instalarApp()">📲 Instalar app</button>
+</div>
