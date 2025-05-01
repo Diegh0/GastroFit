@@ -17,6 +17,7 @@
     </ng-template>
 
     <button (click)="comenzar()" class="boton">🍽️ Comenzar</button>
+    
   </div>
 </section>
 
@@ -52,7 +53,20 @@
   <h2>¿Listo para empezar?</h2>
   <button (click)="comenzar()" class="boton">🗓️ Planifica tu semana</button>
 </section>
+<!-- Botón flotante de instalación -->
+<button class="instalar-flotante" (click)="instalarApp()" *ngIf="mostrarBotonInstalar">
+  📲 Instalar app
+</button>
 
-<div *ngIf="mostrarBotonInstalar" class="instalar-container">
-  <button class="instalar-btn" (click)="instalarApp()">📲 Instalar app</button>
+<div
+  class="burbuja-instalar"
+  [ngClass]="{ 'desaparecer': !mostrarBurbuja }"
+  *ngIf="mostrarBotonInstalar"
+>
+  💡 Instala la app para acceder más rápido desde tu pantalla de inicio 📱
 </div>
+
+
+
+
+

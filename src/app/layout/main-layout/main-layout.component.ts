@@ -4,6 +4,7 @@ import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'firebase/auth';
+import { InstallPromptService } from 'src/app/services/install-prompt.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -11,21 +12,18 @@ import { User } from 'firebase/auth';
   styleUrls: ['./main-layout.component.scss'],
   standalone: false
 })
-export class MainLayoutComponent implements OnInit{
+export class MainLayoutComponent {
   menuAbierto = false;
   user$: Observable<User | null>;
-  deferredPrompt: any = null;
   mostrarBotonInstalar = false;
-  constructor(private authService: AuthService, private router: Router) {
+
+  constructor(private authService: AuthService, private router: Router,private installPromptService: InstallPromptService) {
+    this.mostrarBotonInstalar = !!this.installPromptService.getPromptEvent();
     this.user$ = this.authService.user$;
   }
-  ngOnInit() {
-    window.addEventListener('beforeinstallprompt', (event: Event) => {
-      event.preventDefault();
-      this.deferredPrompt = event;
-      this.mostrarBotonInstalar = true;
-    });
-  }
+ 
+ 
+ 
   toggleMenu(): void {
     this.menuAbierto = !this.menuAbierto;
   }
@@ -39,18 +37,19 @@ export class MainLayoutComponent implements OnInit{
       this.router.navigate(['/login']);
     });
   }
+ 
+
   instalarApp() {
-    if (this.deferredPrompt) {
-      this.deferredPrompt.prompt();
-
-      this.deferredPrompt.userChoice.then((choiceResult: any) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('✅ App instalada');
+    const prompt = this.installPromptService.getPromptEvent();
+    if (prompt) {
+      prompt.prompt();
+      prompt.userChoice.then((res: any) => {
+        if (res.outcome === 'accepted') {
+          console.log('✅ Instalación aceptada');
         } else {
-          console.log('❌ Usuario canceló');
+          console.log('❌ Instalación cancelada');
         }
-
-        this.deferredPrompt = null;
+        this.installPromptService.clearPrompt();
         this.mostrarBotonInstalar = false;
       });
     }

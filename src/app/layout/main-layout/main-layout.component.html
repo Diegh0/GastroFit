@@ -8,42 +8,44 @@
 
   <!-- Menú de navegación -->
   <div class="nav-links" [ngClass]="{ open: menuAbierto }">
-    <ng-container *ngIf="user$ | async as user; else noSesion">
+    <!-- Enlaces siempre visibles -->
+    <a routerLink="/" routerLinkActive="active" (click)="cerrarMenu()">Inicio</a>
+    <a routerLink="/ia" routerLinkActive="active" (click)="cerrarMenu()">IA</a>
+
+    <!-- Enlaces protegidos (solo si hay usuario) -->
+    <ng-container *ngIf="user$ | async as user">
       <a routerLink="/comidas" routerLinkActive="active" (click)="cerrarMenu()">Comidas</a>
       <a routerLink="/planificacion" routerLinkActive="active" (click)="cerrarMenu()">Planificación</a>
-      <a routerLink="/ia" routerLinkActive="active" (click)="cerrarMenu()">IA</a>
-      <ng-container *ngIf="mostrarBotonInstalar">
-        <button mat-menu-item (click)="instalarApp()">
-          📲 Instalar app
-        </button>
-      </ng-container>
-      
     </ng-container>
 
-    <ng-template #noSesion>
+    <!-- Mostrar login solo si no hay usuario -->
+    <ng-container *ngIf="!(user$ | async)">
       <a routerLink="/auth" routerLinkActive="active" (click)="cerrarMenu()">Iniciar sesión</a>
-    </ng-template>
+    </ng-container>
   </div>
+
+  <!-- Menú de usuario con avatar -->
   <ng-container *ngIf="user$ | async as user">
     <button mat-icon-button [matMenuTriggerFor]="userMenu" class="avatar-btn">
       <span class="avatar-circle">{{ user.email?.[0] | uppercase }}</span>
     </button>
-  
+
     <mat-menu #userMenu="matMenu" class="user-menu" [overlapTrigger]="false">
       <div class="menu-content">
         <div class="avatar-wrapper">
-          <div class="avatar-large">
-            {{ user.email?.[0] | uppercase }}
-          </div>
+          <div class="avatar-large">{{ user.email?.[0] | uppercase }}</div>
         </div>
         <p class="user-email">{{ user.email }}</p>
+
+        <!-- Botón para instalar la app -->
+        <button *ngIf="mostrarBotonInstalar" mat-raised-button color="accent" (click)="instalarApp()">
+          📲 Instalar app
+        </button>
+
         <button mat-raised-button color="primary" (click)="logout()">Cerrar sesión</button>
       </div>
     </mat-menu>
-    
-    
   </ng-container>
-  
 </nav>
 
 <main class="contenido">

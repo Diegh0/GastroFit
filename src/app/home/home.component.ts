@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { User } from 'firebase/auth';
+import { InstallPromptService } from '../services/install-prompt.service';
 
 @Component({
   selector: 'app-home',
@@ -15,18 +16,32 @@ export class HomeComponent {
   mostrarBotonInstalar = false;
 
   user: User | null = null;
+  mostrarBurbuja = false;
 
-  constructor(private authService: AuthService, private router: Router) {
-    window.addEventListener('beforeinstallprompt', (event: Event) => {
-      event.preventDefault();
-      this.deferredPrompt = event;
-      this.mostrarBotonInstalar = true;
-    });
-
+  constructor(
+    private installPromptService: InstallPromptService,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    // Mostrar el botón de instalación si el navegador disparó el evento y lo hemos guardado
+    this.mostrarBotonInstalar = !!this.installPromptService.getPromptEvent();
+    this.mostrarBotonInstalar = true;
+    // Suscribirse al estado del usuario para mostrar contenido dinámico
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
+    if (this.mostrarBotonInstalar) {
+      this.mostrarBurbuja = true;
+    
+      // Oculta la burbuja tras unos segundos
+      setTimeout(() => {
+        this.mostrarBurbuja = false;
+      }, 6000);
+    }
+   
+    
   }
+  
 
   comenzar() {
     if (this.user) {
@@ -37,18 +52,19 @@ export class HomeComponent {
   }
 
   instalarApp() {
-    if (this.deferredPrompt) {
-      this.deferredPrompt.prompt();
-
-      this.deferredPrompt.userChoice.then((choiceResult: any) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('✅ El usuario aceptó instalar la app');
+    const promptEvent = this.installPromptService.getPromptEvent();
+    if (promptEvent) {
+      promptEvent.prompt();
+  
+      promptEvent.userChoice.then((result: any) => {
+        if (result.outcome === 'accepted') {
+          console.log('✅ Usuario aceptó instalar');
         } else {
-          console.log('❌ El usuario rechazó instalar la app');
+          console.log('❌ Usuario rechazó instalar');
         }
-        this.deferredPrompt = null;
+        this.installPromptService.clearPrompt();
         this.mostrarBotonInstalar = false;
       });
     }
-  }
+}
 }
