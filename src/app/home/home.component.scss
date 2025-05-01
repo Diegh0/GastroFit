@@ -174,3 +174,24 @@
     padding: 1rem !important;
   }
 }
+.instalar-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.instalar-btn {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: #256428;
+  }
+}
+

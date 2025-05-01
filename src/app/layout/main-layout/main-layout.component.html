@@ -12,6 +12,12 @@
       <a routerLink="/comidas" routerLinkActive="active" (click)="cerrarMenu()">Comidas</a>
       <a routerLink="/planificacion" routerLinkActive="active" (click)="cerrarMenu()">Planificación</a>
       <a routerLink="/ia" routerLinkActive="active" (click)="cerrarMenu()">IA</a>
+      <ng-container *ngIf="mostrarBotonInstalar">
+        <button mat-menu-item (click)="instalarApp()">
+          📲 Instalar app
+        </button>
+      </ng-container>
+      
     </ng-container>
 
     <ng-template #noSesion>

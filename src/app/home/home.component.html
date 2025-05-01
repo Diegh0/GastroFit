@@ -46,4 +46,8 @@
     <h2>¿Listo para empezar?</h2>
         <button routerLink="/planificacion" class="boton">🗓️ Planifica tu semana</button>
   </section>
+  <div *ngIf="mostrarBotonInstalar" class="instalar-container">
+    <button class="instalar-btn" (click)="instalarApp()">📲 Instalar app</button>
+  </div>
+  
   
