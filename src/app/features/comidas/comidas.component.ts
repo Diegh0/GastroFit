@@ -5,6 +5,7 @@ import { IaHistoryService } from 'src/app/core/services/ia-history.service';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AffiliateService } from 'src/app/services/affiliate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comidas',
@@ -17,12 +18,13 @@ export class ComidasComponent implements OnInit {
   mostrarSoloFavoritos: boolean = false;
   comidasIA: Comida[] = [];
 
-  constructor(private comidaService: ComidaService,private iaHistoryService: IaHistoryService,public affiliate: AffiliateService) {}
+  constructor(private comidaService: ComidaService,private iaHistoryService: IaHistoryService,public affiliate: AffiliateService, private router: Router) {}
 
   ngOnInit(): void {
     this.comidaService.getComidas().then(comidas => {
       this.comidas = comidas;
     });
+    
   
     this.iaHistoryService.getIaHistory().subscribe(iaEntries => {
       const validEntries = iaEntries.filter(entry =>
@@ -128,6 +130,8 @@ export class ComidasComponent implements OnInit {
     this.comidasIA = this.comidasIA.filter(c => c.id !== comida.id);
     this.iaHistoryService.deleteByRecipeId(comida.id!);
   }
-  
+  irAMenuInteligente(): void {
+    this.router.navigate(['/ia']);
+  }
   
 }

@@ -17,8 +17,18 @@
     (comidaEliminada)="eliminarComida($event)">
   </app-comida-list>
 
+  <h2>🤖 Recomendaciones generadas por la APP</h2>
+  <div *ngIf="comidasIA.length === 0" class="mensaje-vacio-ia">
+    
+    <p>
+      🧠 Aún no has generado ningún plato personalizado.<br />
+      <strong>Diseña tu primer menú según tus objetivos y transforma tu alimentación.</strong>
+    </p>
+    <button (click)="irAMenuInteligente()" class="boton-inteligente">
+      ⚡ Generar menú inteligente
+    </button>
+  </div>
   <div *ngIf="comidasIA.length > 0">
-    <h2>🤖 Recomendaciones generadas por la APP</h2>
     <app-comida-list
   [comidas]="comidasIA"
   (comidaEliminada)="eliminarComidaIA($event)"

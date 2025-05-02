@@ -1,5 +1,10 @@
 <!-- Carrusel de afiliados -->
 <div class="grid-comidas">
+  <div *ngIf="comidas.length === 0" class="mensaje-vacio">
+    <p>🍽️ ¿Tienes hambre de progreso? <br /> Añade tu primera comida.</p>
+    <button (click)="scrollAlFormulario()" class="boton-progreso">➕ Agregar comida</button>
+  </div>
+
   <div class="comida-card" *ngFor="let comida of comidas">
 
     <div class="imagen-wrapper">

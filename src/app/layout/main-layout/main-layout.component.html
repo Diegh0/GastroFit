@@ -1,5 +1,5 @@
 <nav class="menu">
-  <a [routerLink]="['']" class="comida-card-link">
+  <a [routerLink]="['/']" class="comida-card-link">
     <div class="logo">🥗 Planificador Saludable</div>
   </a>
 
@@ -9,7 +9,7 @@
   <!-- Menú de navegación -->
   <div class="nav-links" [ngClass]="{ open: menuAbierto }">
     <!-- Enlaces siempre visibles -->
-    <a routerLink="/" routerLinkActive="active" (click)="cerrarMenu()">Inicio</a>
+    <!-- <a routerLink="/" routerLinkActive="active" (click)="cerrarMenu()">Inicio</a> -->
     <a routerLink="/ia" routerLinkActive="active" (click)="cerrarMenu()">Menú Inteligente</a>
 
     <!-- Enlaces protegidos (solo si hay usuario) -->

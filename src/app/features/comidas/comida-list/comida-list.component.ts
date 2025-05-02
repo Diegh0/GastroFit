@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AfiliadoProducto, Comida } from 'src/app/core/models/comida.model';
 import { AffiliateService } from 'src/app/services/affiliate.service';
 
@@ -26,6 +27,15 @@ export class ComidaListComponent {
     
   }
 
+  scrollAlFormulario(): void {
+    const formulario = document.getElementById('formulario-comida');
+    if (formulario) {
+      formulario.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
  
+  
+ 
+    
    
 }

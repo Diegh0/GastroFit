@@ -1,7 +1,7 @@
 <div class="card-form">
   <h2>Agregar nueva comida</h2>
 
-  <form [formGroup]="form" (ngSubmit)="guardar()">
+  <form id="formulario-comida" [formGroup]="form" (ngSubmit)="guardar()">
     <div class="form-group">
       <label>Nombre de la comida</label>
       <input formControlName="nombre" type="text" required />
