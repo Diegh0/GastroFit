@@ -27,6 +27,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule }      from '@angular/material/list';
 import { MatIconModule }   from '@angular/material/icon';
 import { IaHistoryService } from 'src/app/core/services/ia-history.service';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-ia',
   standalone: true,
@@ -40,7 +42,8 @@ import { IaHistoryService } from 'src/app/core/services/ia-history.service';
     MatCardModule,
     MatExpansionModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule 
   ],
   templateUrl: './ia.component.html',
   styleUrls: ['./ia.component.scss']
@@ -70,7 +73,7 @@ readonly mealTypes  = ['Desayuno','Almuerzo','Merienda','Cena'] as const;
     { label: 'Volumen',       value: 'volumen'      }
   ] as { label: string; value: Objective }[];
 
-  constructor(private fb: FormBuilder, private mealPlan: MealPlanService,private iaService: IaHistoryService)  {
+  constructor(private fb: FormBuilder, private mealPlan: MealPlanService,private iaService: IaHistoryService,private snackBar: MatSnackBar)  {
     this.form = this.fb.group({
       peso:           [null, [Validators.required, Validators.min(30)]],
       altura:         [null, [Validators.required, Validators.min(100)]],
@@ -130,8 +133,19 @@ readonly mealTypes  = ['Desayuno','Almuerzo','Merienda','Cena'] as const;
       }))      
       
     }).then(() => {
-      console.log('Añadido al historial IA');
+      this.snackBar.open('✅ Comida guardada en tu historial', 'Cerrar', {
+        duration: 3000,
+        panelClass: 'custom-snackbar-success' // 👈 estilo verde bonito
+      });
+    })
+    .catch(err => {
+      console.error('Error al guardar en iaHistory:', err);
+      this.snackBar.open('❌ Error al guardar la comida', 'Cerrar', {
+        duration: 3000,
+        panelClass: 'custom-snackbar-error' // 👈 si aplicas también estilo de error
+      });
     });
+    
   }
   
   
