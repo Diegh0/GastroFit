@@ -296,6 +296,111 @@
     padding: 0;
   }
 }
+// MSJ AVISO DE INSTALAR APP E INICIAR SESION
+.info-guest-banner {
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 24px;
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 700px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease-in-out;
+
+  h3 {
+    margin: 0;
+    color: #2d2d2d;
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+
+  .descripcion {
+    margin: 16px 0;
+    color: #555;
+    font-size: 0.95rem;
+
+    .icono {
+      display: inline-block;
+      width: 1.4rem;
+    }
+  }
+
+  .acciones {
+    margin-top: 20px;
+
+    button {
+      margin: 0 10px;
+      min-width: 140px;
+    }
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.7s ease-in-out both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.acciones {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  .boton-sesion,
+  .boton-instalar {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .boton-sesion:hover,
+  .boton-instalar:hover {
+    background-color: #27672a;
+  }
+
+  .boton-instalar {
+    background-color: #1565c0;
+
+    &:hover {
+      background-color: #0d47a1;
+    }
+  }
+}
+.ilustracion-bienvenida {
+  width: 80px;
+  height: auto;
+  margin-bottom: 12px;
+  animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 
 

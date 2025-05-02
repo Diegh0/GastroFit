@@ -16,6 +16,24 @@
       <p>Planifica tus comidas, controla tus macros y mejora tu alimentación de forma visual y sencilla.</p>
     </ng-template>
 
+    <section *ngIf="!user" class="info-guest-banner fade-in">
+      <img src="assets/ilustraciones/chef-svgrepo-com.svg" alt="Chef GastroFit" class="ilustracion-bienvenida" />
+      <h3>👋 ¡Bienvenido a GastroFit!</h3>
+      <p class="descripcion">
+        <span class="icono">🔐</span> Inicia sesión para guardar tus comidas, historial y favoritos.<br />
+        <span class="icono">📲</span> Instala la app para acceder más rápido desde tu pantalla de inicio.
+      </p>
+      <div class="acciones">
+        <button class="boton-sesion" (click)="comenzar()">
+          🔐 Iniciar sesión
+        </button>
+        <button *ngIf="mostrarBotonInstalar" class="boton-instalar" (click)="instalarApp()">
+          📲 Instalar app
+        </button>
+      </div>
+      
+    </section>
+
     <button (click)="comenzar()" class="boton">🍽️ Comenzar</button>
     
   </div>
@@ -65,7 +83,7 @@
 >
   💡 Instala la app para acceder más rápido desde tu pantalla de inicio 📱
 </div>
-<div *ngIf="mostrarGuiaIOS" class="guia-ios">
+<div *ngIf="mostrarGuiaIOS" class="guia-ios fade-in">
   <button class="cerrar-btn" (click)="cerrarGuiaIOS()">✕</button>
   📱 Para instalar esta app en tu iPhone:
   <ul>
@@ -73,6 +91,7 @@
     <li>2. Elige <strong>“Añadir a pantalla de inicio”</strong>.</li>
   </ul>
 </div>
+
 
 
 
