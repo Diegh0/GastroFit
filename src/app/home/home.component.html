@@ -65,6 +65,15 @@
 >
   💡 Instala la app para acceder más rápido desde tu pantalla de inicio 📱
 </div>
+<div *ngIf="mostrarGuiaIOS" class="guia-ios">
+  <button class="cerrar-btn" (click)="cerrarGuiaIOS()">✕</button>
+  📱 Para instalar esta app en tu iPhone:
+  <ul>
+    <li>1. Pulsa el icono de <strong>Compartir</strong> en Safari.</li>
+    <li>2. Elige <strong>“Añadir a pantalla de inicio”</strong>.</li>
+  </ul>
+</div>
+
 
 
 

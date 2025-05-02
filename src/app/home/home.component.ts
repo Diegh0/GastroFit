@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   user: User | null = null;
   mostrarBurbuja = false;
+  mostrarGuiaIOS = false;
 
   constructor(
     private installPromptService: InstallPromptService,
@@ -38,12 +39,23 @@ export class HomeComponent implements OnInit {
         }, 6000);
       }
     });
-  
+    const isIOS = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+    
+    if (isIOS && !isStandalone) {
+      this.mostrarGuiaIOS = true;
+    }
+    console.log('iOS detectado?', isIOS);
+    console.log('Standalone?', isStandalone);
+
+    
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
   }
   
+  cerrarGuiaIOS() {
+    this.mostrarGuiaIOS = false;
+  }
   
 
   comenzar() {
