@@ -1,9 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
- // ANIMACION MENSAJE DE CONFIRMACION DE COMIDA GUARDADA
- ::ng-deep .mat-mdc-snack-bar-container.custom-snackbar-success {
+/* ——— REGLAS BASE ——— */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #f6fdfa; // Ajusta si usas otro color base
+    overscroll-behavior: none;
+  }
+  
+  /* ——— VARIABLES SEGURO PARA MÓVIL ——— */
+  :root {
+    --safe-area-inset-top: env(safe-area-inset-top);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* ——— SNACKBAR ANIMACIÓN ÉXITO ——— */
+  ::ng-deep .mat-mdc-snack-bar-container.custom-snackbar-success {
     background-color: #2e7d32 !important;
     color: #fff !important;
     border-radius: 8px !important;
@@ -21,6 +33,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #fff !important;
   }
   
+  /* ——— ANIMACIÓN ——— */
   @keyframes fadeSlideUp {
     from {
       opacity: 0;
@@ -31,5 +44,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       transform: translateY(0);
     }
   }
-  
   
