@@ -1,27 +1,51 @@
-# PlanificadorDietaNg17
+### 🥗 GastroFit — Tu planificador inteligente de comidas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.9.
+**GastroFit** es una Progressive Web App (PWA) moderna y responsive que te permite planificar tus comidas semanales, llevar el control nutricional y generar menús inteligentes personalizados. Diseñada para optimizar tu alimentación y mejorar tu salud de forma sencilla y visual.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### 📲 Demo
+![Vista previa de GastroFit](assets/github/portada.png)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+🔗 [gastro-fit-lyx2.vercel.app](https://gastro-fit-lyx2.vercel.app)
 
-## Build
+> Instálala en tu móvil u ordenador como una app nativa (compatible con Android, iOS y escritorio).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+### ✨ Funcionalidades principales
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- 📆 **Planificación semanal por franjas horarias** (desayuno, comida, cena…)
+- 🍽️ **Arrastra y suelta** platos desde una lista para organizar tu menú de forma intuitiva
+- 🧮 **Resumen nutricional diario y semanal** con calorías, proteínas, grasas e hidratos
+- 💾 **Historial de semanas**: guarda, duplica y reutiliza planificaciones pasadas
+- 🧠 **Menú inteligente Adaptado**: genera comidas saludables de forma automática en base a tus requerimientos
+- 🔐 **Gestión de usuarios con Firebase**: login, registro y datos guardados por usuario
+- ⭐ Marca comidas como favoritas y añádelas fácilmente a tu planificación
+- 📱 **100% responsive** y funcional como **PWA** (instalable)
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 🧠 Tecnologías usadas
 
-## Further help
+- **Angular 16+**
+- **Firebase (Auth + Firestore)**
+- **Angular Material**
+- **ngx-joyride** (onboarding interactivo)
+- **CDK Drag and Drop**
+- **SCSS + Flex/Grid Layout**
+- **PWA ready**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+---
+
+### 📸 Capturas de pantalla
+
+_Añade aquí algunas imágenes de tu app en uso (opcional)_
+
+---
+
+### 📬 Contacto
+
+¿Feedback o sugerencias?  
+Puedes escribirme en [tu email o redes sociales].
