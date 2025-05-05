@@ -7,7 +7,7 @@
 ### 📲 Demo
 <p align="center">
   <img src="src/assets/github/portada.png" alt="Vista escritorio" width="50%" style="margin-right: 10px;"/>
-  <img src="src/assets/github/portada-movil-marco.png" alt="Vista móvil" width="25%"/>
+  <img src="src/assets/github/portada-movil-marco.png" alt="Vista móvil" width="15%"/>
 </p>
 
 
