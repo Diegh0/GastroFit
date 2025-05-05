@@ -29,6 +29,9 @@ import { MatIconModule }   from '@angular/material/icon';
 import { IaHistoryService } from 'src/app/core/services/ia-history.service';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
+import { Injectable } from '@angular/core';
+import { Firestore, collection, addDoc, doc } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-ia',
   standalone: true,
@@ -73,7 +76,7 @@ readonly mealTypes  = ['Desayuno','Almuerzo','Merienda','Cena'] as const;
     { label: 'Volumen',       value: 'volumen'      }
   ] as { label: string; value: Objective }[];
 
-  constructor(private fb: FormBuilder, private mealPlan: MealPlanService,private iaService: IaHistoryService,private snackBar: MatSnackBar)  {
+  constructor(private fb: FormBuilder, private mealPlan: MealPlanService,private iaService: IaHistoryService,private snackBar: MatSnackBar,private firestore: Firestore, private auth: AuthService)  {
     this.form = this.fb.group({
       peso:           [null, [Validators.required, Validators.min(30)]],
       altura:         [null, [Validators.required, Validators.min(100)]],
@@ -147,8 +150,14 @@ readonly mealTypes  = ['Desayuno','Almuerzo','Merienda','Cena'] as const;
     });
     
   }
-  
-  
-  
-  
+  // src/app/core/services/ia-history.service.ts
+
+  async addIaEntry(entry: any): Promise<void> {
+    const userId = this.auth.getUserId();
+    if (!userId) throw new Error('Usuario no autenticado');
+
+    const iaHistoryRef = collection(this.firestore, `users/${userId}/iaHistory`);
+    await addDoc(iaHistoryRef, entry);
+  }
+
 }

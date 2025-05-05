@@ -111,7 +111,7 @@ export class AuthComponent implements OnInit {
     this.auth.register(this.email, this.password)
       .then(() => {
         this.snackBar.open('Registro exitoso, bienvenido!', 'Cerrar', { duration: 3000 });
-        this.router.navigate(['/planificacion']);
+        this.router.navigate(['/']);
       })
       .catch(err => {
         let mensaje = 'Error en el registro';

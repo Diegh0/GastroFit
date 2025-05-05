@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmacionDialogComponent } from 'src/app/shared/components/confirmacion-dialog/confirmacion-dialog.component';
 import { PlanificacionService } from 'src/app/core/services/planificacion.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { JoyrideService } from 'ngx-joyride';
 
 @Component({
   selector: 'app-planificador-semanal',
@@ -42,13 +43,19 @@ export class PlanificadorSemanalComponent implements OnInit {
     private comidaService: ComidaService,
     private planificacionService: PlanificacionService,
     private dialog: MatDialog,
-    private auth:AuthService
+    private auth:AuthService,
+    private joyrideService: JoyrideService
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.comidasDisponibles = await this.comidaService.getComidas();
     await this.cargarPlanificacionDesdeFirestore();
+
+    // Iniciar tutorial si es la primera vez
+   
+    this.iniciarTutorialSiEsPrimeraVez();
   }
+
   mostrarMensajeTemporal(texto: string) {
     this.mensajeConfirmacion = texto;
     this.mostrarMensaje = true;
@@ -278,4 +285,28 @@ export class PlanificadorSemanalComponent implements OnInit {
     this.fechaDestinoDuplicado = '';
     this.mostrarModalDuplicado = true;
   }
+  iniciarTutorialSiEsPrimeraVez() {
+    const yaVisto = localStorage.getItem('tourPlanificador');
+    console.log('¿Ya se vio el tutorial?', yaVisto);
+  
+    if (!yaVisto) {
+      console.log('Lanzando tutorial Joyride...');
+      this.joyrideService.startTour({
+        steps: ['comidasDisponibles', 'tablaPlanificacion', 'accionesPlanificador', 'resumenSemanal'],
+        stepDefaultPosition: 'bottom',
+        showCounter: true,
+        showPrevButton: true
+      });
+      localStorage.setItem('tourPlanificador', 'visto');
+    }
+  }
+  forzarTour() {
+    this.joyrideService.startTour({
+      steps: ['comidasDisponibles', 'tablaPlanificacion', 'accionesPlanificador', 'resumenSemanal'],
+      stepDefaultPosition: 'bottom',
+      showCounter: true,
+      showPrevButton: true
+    });
+  }
+  
 }

@@ -7,11 +7,13 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PlanificadorSemanalComponent } from './planificador-semanal/planificador-semanal.component';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { JoyrideModule } from 'ngx-joyride';
 
 
 @NgModule({
   declarations: [
     PlanificacionComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     PlanificacionRoutingModule ,
     PlanificadorSemanalComponent ,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    JoyrideModule.forRoot()
   ]
 })
 export class PlanificacionModule { }

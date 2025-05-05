@@ -1,12 +1,15 @@
 <div class="contenedor-planificador">
   <!-- LISTA LATERAL -->
   <aside
-    class="lista-comidas"
-    cdkDropList
-    id="lista-comidas"
-    [cdkDropListData]="comidasDisponibles"
-    [cdkDropListConnectedTo]="celdasIds"
-  >
+  joyrideStep="comidasDisponibles"
+  title="Comidas disponibles"
+  text="Aquí puedes ver las comidas que has guardado. Arrástralas al calendario para planificarlas."
+  class="lista-comidas"
+  cdkDropList
+  id="lista-comidas"
+  [cdkDropListData]="comidasDisponibles"
+  [cdkDropListConnectedTo]="celdasIds"
+>
     <h3>🍽️ Comidas disponibles</h3>
     <div
       *ngFor="let comida of comidasDisponibles"
@@ -33,7 +36,12 @@
     </div>
 
     <!-- Tabla del calendario -->
-    <table class="tabla-calendario">
+    <table
+      joyrideStep="tablaPlanificacion"
+      title="Tabla semanal"
+      text="Esta es tu semana: puedes soltar comidas por franjas y días. También puedes añadir más franjas."
+      class="tabla-calendario"
+    >
       <thead>
         <tr>
           <th></th>
@@ -86,7 +94,12 @@
     </div>
 
     <!-- BOTONES -->
-     <div class="botonera">
+    <div
+    joyrideStep="accionesPlanificador"
+    title="Opciones de planificación"
+    text="Aquí puedes añadir franjas, ver resúmenes nutricionales y duplicar semanas pasadas."
+    class="botonera"
+  >
       <button class="boton-outlined" (click)="abrirModalFranja()">➕ Añadir franja horaria</button>
       <button class="boton-accent" (click)="verResumenSemanal()">📊 Ver resumen semanal</button>
       <button class="boton-primario" (click)="mostrarDuplicador = !mostrarDuplicador">📋 Duplicar semana</button>
@@ -117,7 +130,13 @@
     </div>
 
     <!-- Resumen semanal -->
-    <div class="resumen-semanal" *ngIf="mostrarResumenSemanal && resumenSemanal">
+    <div
+      *ngIf="mostrarResumenSemanal && resumenSemanal"
+      joyrideStep="resumenSemanal"
+      title="Resumen nutricional"
+      text="Consulta aquí los totales de calorías, proteínas, grasas e hidratos de la semana."
+      class="resumen-semanal"
+    >
       <h3>Resumen Nutricional Semanal</h3>
       <ul>
         <li><strong>Calorías:</strong> {{ resumenSemanal.calorias }} kcal</li>
@@ -139,6 +158,7 @@
 <div class="mensaje-confirmacion" *ngIf="mostrarMensaje">
   {{ mensajeConfirmacion }}
 </div>
+<button (click)="forzarTour()">🎯 Iniciar Tour (Debug)</button>
 
 
 </div>

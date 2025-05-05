@@ -27,7 +27,7 @@ export class ComidaService {
     if (!user) return;
 
     const ref = collection(this.firestore, `users/${user.uid}/comidas`);
-    this.comidas = data;
+    //this.comidas = data;
 
     // Borrar comidas anteriores
     const snapshot = await getDocs(ref);
@@ -56,16 +56,14 @@ export class ComidaService {
     );
   }
   async getComidas(): Promise<Comida[]> {
-    if (this.comidas.length) return this.comidas;
+    //if (this.comidas.length) return this.comidas;
 
     const user = await firstValueFrom(this.auth.user$);
     if (!user) return [];
 
     const ref = collection(this.firestore, `users/${user.uid}/comidas`);
     const snapshot = await getDocs(ref);
-    this.comidas = snapshot.docs.map((doc) => doc.data() as Comida);
-
-    return this.comidas;
+    return snapshot.docs.map((doc) => doc.data() as Comida);
   }
 
   getComidaPorId(id: string): Comida | undefined {

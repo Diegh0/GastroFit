@@ -7,19 +7,27 @@ import {
 import { HistoryEntry, HistoryEntryIA } from '../models/history-entry';
 import { collectionData } from '@angular/fire/firestore';
 import { firstValueFrom, Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class IaHistoryService {
-  private userId = 'usuario-ejemplo'; // luego lo sacas dinámicamente del auth
-  constructor(private firestore: Firestore) {}
+ // private userId = 'usuario-ejemplo'; // luego lo sacas dinámicamente del auth
+  private userId =  this.authService.getUserId();
 
-  private iaHistoryRef(): CollectionReference {
-    return collection(this.firestore, `users/${this.userId}/iaHistory`) as CollectionReference;
-  }
+  constructor(private firestore: Firestore, private authService: AuthService) {}
 
-  private historyRef(): CollectionReference {
-    return collection(this.firestore, `users/${this.userId}/history`) as CollectionReference;
-  }
+ private iaHistoryRef(): CollectionReference {
+  const userId = this.authService.getUserId();
+  if (!userId) throw new Error('Usuario no autenticado');
+  return collection(this.firestore, `users/${userId}/iaHistory`) as CollectionReference;
+}
+
+private historyRef(): CollectionReference {
+  const userId = this.authService.getUserId();
+  if (!userId) throw new Error('Usuario no autenticado');
+  return collection(this.firestore, `users/${userId}/history`) as CollectionReference;
+}
+
   
  
 
