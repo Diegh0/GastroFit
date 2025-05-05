@@ -32,7 +32,7 @@
 </p>
 - 🔐 **Gestión de usuarios con Firebase**: login, registro y datos guardados por usuario
 - ⭐ Marca comidas como favoritas y añádelas fácilmente a tu planificación
--   - <img src="src/assets/github/historial-comidas.png" alt="Vista escritorio" width="50%"/>
+-   - <img src="src/assets/github/historial-comidas.png" alt="Vista escritorio" width="30%"/>
 - 📱 **100% responsive** y funcional como **PWA** (instalable)
 
 ---
@@ -42,20 +42,13 @@
 - **Angular 16+**
 - **Firebase (Auth + Firestore)**
 - **Angular Material**
-- **ngx-joyride** (onboarding interactivo)
 - **CDK Drag and Drop**
 - **SCSS + Flex/Grid Layout**
 - **PWA ready**
 
 ---
 
-### 📸 Capturas de pantalla
-
-_Añade aquí algunas imágenes de tu app en uso (opcional)_
-
----
-
 ### 📬 Contacto
 
 ¿Feedback o sugerencias?  
-Puedes escribirme en [tu email o redes sociales].
+Puedes escribirme en diegofuertesmo@gmail.com.
