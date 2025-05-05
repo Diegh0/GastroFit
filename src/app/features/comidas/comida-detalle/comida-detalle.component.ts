@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { Comida } from 'src/app/core/models/comida.model';
 import { ComidaService } from 'src/app/core/services/comida.service';
 import { IaHistoryService } from 'src/app/core/services/ia-history.service';
@@ -20,7 +21,9 @@ export class ComidaDetalleComponent implements OnInit {
 
   ) {}
 
-  ngOnInit(): void {
+ 
+
+  async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) return;
   
@@ -29,21 +32,23 @@ export class ComidaDetalleComponent implements OnInit {
   
     // Si no se encuentra, buscar en comidas IA
     if (!this.comida) {
-      this.iaHistoryService.getIaHistory().subscribe(iaEntries => {
-        const ia = iaEntries.find(entry => entry.recipeId === id);
-        if (ia) {
-          this.comida = {
-            id: ia.recipeId,
-            nombre: ia.nombre,
-            ingredientes: ia.ingredientes ?? [],
-            imagenUrl: ia.imagenUrl || 'assets/imgPredeterminadaCars.png',
-            favorita: ia.favorita ?? false,
-            fechaCreacion: ia.fechaGeneracion,
-            source: 'ia'
-          };
-        }
-      });
+      const ia$ = await this.iaHistoryService.getIaHistory();
+      const iaEntries = await firstValueFrom(ia$);
+  
+      const ia = iaEntries.find(entry => entry.recipeId === id);
+      if (ia) {
+        this.comida = {
+          id: ia.recipeId,
+          nombre: ia.nombre,
+          ingredientes: ia.ingredientes ?? [],
+          imagenUrl: ia.imagenUrl || 'assets/imgPredeterminadaCars.png',
+          favorita: ia.favorita ?? false,
+          fechaCreacion: ia.fechaGeneracion,
+          source: 'ia'
+        };
+      }
     }
   }
+  
   
 }
