@@ -4,6 +4,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { IaComponent } from './pages/ia/ia.component';
+import { VerificacionComponent } from './auth/verificacion/verificacion.component';
 
 const routes: Routes = [
   // Ruta para login/registro
@@ -12,6 +13,11 @@ const routes: Routes = [
     loadComponent: () =>
       import('./auth/auth/auth.component').then(m => m.AuthComponent)
   },
+  {
+    path: 'verificacion',
+    component: VerificacionComponent
+  },
+  
 
   // Ruta principal con layout compartido
   {

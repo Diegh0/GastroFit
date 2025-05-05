@@ -109,16 +109,18 @@ export class AuthComponent implements OnInit {
       return;
     }
     this.auth.register(this.email, this.password)
-      .then(() => {
-        this.snackBar.open('Registro exitoso, bienvenido!', 'Cerrar', { duration: 3000 });
-        this.router.navigate(['/']);
-      })
-      .catch(err => {
-        let mensaje = 'Error en el registro';
-        if (err.code === 'auth/email-already-in-use') {
-          mensaje = 'El correo ya está registrado';
-        }
-        this.snackBar.open(`Error: ${mensaje}`, 'Cerrar', { duration: 3000 });
+    .then(() => {
+      this.snackBar.open('Registro exitoso. Verifica tu correo electrónico antes de continuar.', 'Cerrar', {
+        duration: 4000,
       });
+      this.router.navigate(['/verificacion']);
+    })
+    .catch(err => {
+      let mensaje = 'Error en el registro';
+      if (err.code === 'auth/email-already-in-use') {
+        mensaje = 'El correo ya está registrado';
+      }
+      this.snackBar.open(`Error: ${mensaje}`, 'Cerrar', { duration: 3000 });
+    });
   }
 }

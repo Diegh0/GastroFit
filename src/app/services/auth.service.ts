@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { onAuthStateChanged, reload, sendEmailVerification, User } from 'firebase/auth';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -10,15 +10,20 @@ export class AuthService {
   public user$ = this.userSubject.asObservable();
 
   constructor(private auth: Auth, private router: Router) {
-    onAuthStateChanged(this.auth, user => this.userSubject.next(user));
+    onAuthStateChanged(this.auth, async user => {
+      if (user) await reload(user); // Asegura que emailVerified esté actualizado
+      this.userSubject.next(user);
+    });
   }
 
   login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  register(email: string, password: string) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+  async register(email: string, password: string) {
+    const cred = await createUserWithEmailAndPassword(this.auth, email, password);
+    await sendEmailVerification(cred.user);
+    return cred;
   }
 
   logout() {
