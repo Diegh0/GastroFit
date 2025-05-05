@@ -5,7 +5,11 @@
 ---
 
 ### 📲 Demo
-<img src="src/assets/github/portada.png" alt="Vista previa de GastroFit" width="600"/>
+<p align="center">
+  <img src="src/assets/github/portada.png" alt="Vista escritorio" width="45%" style="margin-right: 10px;"/>
+  <img src="src/assets/github/portada-movil-marco.png" alt="Vista móvil" width="30%"/>
+</p>
+
 
 🔗 [gastro-fit-lyx2.vercel.app](https://gastro-fit-lyx2.vercel.app)
 
