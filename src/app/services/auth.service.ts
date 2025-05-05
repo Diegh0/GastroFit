@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -31,5 +31,9 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.auth.currentUser !== null;
   }
-
+  async getUserIdAsync(): Promise<string | null> {
+    const user = await firstValueFrom(this.user$);
+    return user?.uid || null;
+  }
+  
 }
