@@ -27,8 +27,8 @@
 - 💾 **Historial de semanas**: guarda, duplica y reutiliza planificaciones pasadas
 - 🧠 **Menú inteligente Adaptado**: genera comidas saludables de forma automática en base a tus requerimientos
  <p align="center">
-  <img src="src/assets/github/formulario-calorias.png" alt="Vista escritorio" width="50%" style="margin-right: 10px;"/>
-  <img src="src/assets/github/menu-generado.png" alt="Vista móvil" width="20%"/>
+  <img src="src/assets/github/formulario-calorias.png" alt="Vista escritorio" width="30%" style="margin-right: 10px;"/>
+  <img src="src/assets/github/menu-generado.png" alt="Vista móvil" width="30%"/>
 </p>
 - 🔐 **Gestión de usuarios con Firebase**: login, registro y datos guardados por usuario
 - ⭐ Marca comidas como favoritas y añádelas fácilmente a tu planificación
