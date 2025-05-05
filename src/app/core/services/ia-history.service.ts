@@ -13,7 +13,7 @@ import {
   doc,
   collectionData,
 } from '@angular/fire/firestore';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom, of, switchMap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { HistoryEntry, HistoryEntryIA } from '../models/history-entry';
 
@@ -46,12 +46,24 @@ export class IaHistoryService {
     });
   }
 
-  async getIaHistory(): Promise<Observable<HistoryEntryIA[]>> {
-    const ref = await this.iaHistoryRef();
-    const q = query(ref, orderBy('fechaGeneracion', 'desc'));
-    return collectionData(q, { idField: 'id' }) as Observable<HistoryEntryIA[]>;
+  // async getIaHistory(): Promise<Observable<HistoryEntryIA[]>> {
+  //   const ref = await this.iaHistoryRef();
+  //   const q = query(ref, orderBy('fechaGeneracion', 'desc'));
+  //   return collectionData(q, { idField: 'id' }) as Observable<HistoryEntryIA[]>;
+  // }
+  getIaHistory(): Observable<HistoryEntryIA[]> {
+    return this.authService.user$.pipe(
+      switchMap(user => {
+        if (!user) return of([]);
+        const ref = query(
+          collection(this.firestore, `users/${user.uid}/iaHistory`),
+          orderBy('fechaGeneracion', 'desc')
+        );
+        return collectionData(ref, { idField: 'id' }) as Observable<HistoryEntryIA[]>;
+      })
+    );
   }
-
+  
   async migrateToMainHistory() {
     const iaRef = await this.iaHistoryRef();
     const mainRef = await this.historyRef();

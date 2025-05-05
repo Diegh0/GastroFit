@@ -8,6 +8,7 @@ import {
   getDocs,
   deleteDoc,
   collectionData,
+  getDoc,
 } from '@angular/fire/firestore';
 import { v4 as uuid } from 'uuid';
 import { firstValueFrom, Observable, of } from 'rxjs';
@@ -56,7 +57,15 @@ export class ComidaService {
     return snapshot.docs.map((doc) => doc.data() as Comida);
   }
 
-  getComidaPorId(id: string): Comida | undefined {
-    return this.comidas.find((c) => c.id === id);
-  }
+  // comida.service.ts
+async getComidaPorId(id: string): Promise<Comida | undefined> {
+  const user = await firstValueFrom(this.auth.user$);
+  if (!user) return undefined;
+
+  const docRef = doc(this.firestore, `users/${user.uid}/comidas/${id}`);
+  const snap = await getDoc(docRef);
+  return snap.exists() ? (snap.data() as Comida) : undefined;
+}
+
+  
 }

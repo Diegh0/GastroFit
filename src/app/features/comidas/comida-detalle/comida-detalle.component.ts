@@ -27,14 +27,12 @@ export class ComidaDetalleComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) return;
   
-    // Primero intenta cargar desde comidas normales
-    this.comida = this.comidaService.getComidaPorId(id);
+    // Busca primero en comidas normales
+    this.comida = await this.comidaService.getComidaPorId(id);
   
-    // Si no se encuentra, buscar en comidas IA
+    // Si no la encuentra, busca en comidas IA
     if (!this.comida) {
-      const ia$ = await this.iaHistoryService.getIaHistory();
-      const iaEntries = await firstValueFrom(ia$);
-  
+      const iaEntries = await firstValueFrom(this.iaHistoryService.getIaHistory());
       const ia = iaEntries.find(entry => entry.recipeId === id);
       if (ia) {
         this.comida = {
@@ -48,7 +46,9 @@ export class ComidaDetalleComponent implements OnInit {
         };
       }
     }
+    console.log("COMIDA: ",this.comida)
   }
+  
   
   
 }
