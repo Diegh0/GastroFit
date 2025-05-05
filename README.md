@@ -5,7 +5,7 @@
 ---
 
 ### 📲 Demo
-<img src="assets/github/portada.png" alt="Vista previa de GastroFit" width="600"/>
+<img src="src/assets/github/portada.png" alt="Vista previa de GastroFit" width="600"/>
 
 🔗 [gastro-fit-lyx2.vercel.app](https://gastro-fit-lyx2.vercel.app)
 
