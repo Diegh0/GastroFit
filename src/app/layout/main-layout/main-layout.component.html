@@ -36,20 +36,16 @@
           <div class="avatar-large">{{ user.email?.[0] | uppercase }}</div>
         </div>
         <p class="user-email">{{ user.email }}</p>
-
-        <!-- Botón para instalar la app -->
-        <button *ngIf="mostrarBotonInstalar" mat-raised-button color="accent" (click)="instalarApp()">
-          📲 Instalar app
-        </button>
-
-        <button mat-raised-button color="primary" (click)="logout()">Cerrar sesión</button>
-        <button mat-menu-item [routerLink]="['/perfil']">
+        
+        <a class="perfil-link" [routerLink]="['/perfil']">
           <mat-icon>person</mat-icon>
           Perfil
-        </button>
-        
+        </a>
+        <button mat-raised-button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+    
+       
       </div>
-    </mat-menu>
+    </mat-menu>  
   </ng-container>
 </nav>
 
