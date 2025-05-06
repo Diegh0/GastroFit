@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-auth',
@@ -19,7 +20,8 @@ import { trigger, style, animate, transition } from '@angular/animations';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatIconModule,
   ],
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
@@ -122,5 +124,8 @@ export class AuthComponent implements OnInit {
       }
       this.snackBar.open(`Error: ${mensaje}`, 'Cerrar', { duration: 3000 });
     });
+  }
+  volver() {
+    this.router.navigate(['/']);
   }
 }

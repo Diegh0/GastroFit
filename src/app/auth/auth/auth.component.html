@@ -1,3 +1,8 @@
+<div class="volver-wrapper">
+  <button mat-icon-button (click)="volver()" aria-label="Volver">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>
 <div class="auth-container" [@pageLoad]>
   <h2 class="title">{{ showRegister ? 'Registro' : 'Inicio de Sesión' }}</h2>
   <form (ngSubmit)="showRegister ? register() : login()">

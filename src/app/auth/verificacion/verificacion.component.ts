@@ -3,11 +3,15 @@ import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { reload, sendEmailVerification } from 'firebase/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-verificacion',
   templateUrl: './verificacion.component.html',
-  styleUrls: ['./verificacion.component.scss']
+  styleUrls: ['./verificacion.component.scss'],
+  imports:[MatButtonModule,MatIconModule]
 })
 export class VerificacionComponent {
   loading = false;
@@ -15,7 +19,8 @@ export class VerificacionComponent {
   constructor(
     private auth: Auth,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private location: Location
   ) {}
 
   async revisarVerificacion() {
@@ -53,5 +58,8 @@ export class VerificacionComponent {
         this.loading = false;
       }
     }
+  }
+  volver() {
+    this.location.back();
   }
 }
