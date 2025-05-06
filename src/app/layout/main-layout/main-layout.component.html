@@ -10,14 +10,14 @@
   <div class="nav-links" [ngClass]="{ open: menuAbierto }">
     <!-- Enlaces siempre visibles -->
     <!-- <a routerLink="/" routerLinkActive="active" (click)="cerrarMenu()">Inicio</a> -->
-    <a routerLink="/ia" routerLinkActive="active" (click)="cerrarMenu()">Menú Inteligente</a>
+   
 
     <!-- Enlaces protegidos (solo si hay usuario) -->
     <ng-container *ngIf="user$ | async as user">
       <a routerLink="/comidas" routerLinkActive="active" (click)="cerrarMenu()">Comidas</a>
       <a routerLink="/planificacion" routerLinkActive="active" (click)="cerrarMenu()">Planificación</a>
     </ng-container>
-
+    <a routerLink="/ia" routerLinkActive="active" (click)="cerrarMenu()">Menú Inteligente</a>
     <!-- Mostrar login solo si no hay usuario -->
     <ng-container *ngIf="!(user$ | async)">
       <a routerLink="/auth" routerLinkActive="active" (click)="cerrarMenu()">Iniciar sesión</a>

@@ -231,6 +231,12 @@
   text-decoration: none;
   transition: background 0.2s ease;
   justify-content: center;
+  margin-bottom: 1rem; // opcional, si quieres aire hacia abajo también
+  &:hover {
+    background-color: #e0f2f1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
 }
 
 @keyframes fadeIn {

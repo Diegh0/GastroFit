@@ -32,6 +32,9 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc, doc } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-ia',
   standalone: true,
@@ -76,7 +79,7 @@ readonly mealTypes  = ['Desayuno','Almuerzo','Merienda','Cena'] as const;
     { label: 'Volumen',       value: 'volumen'      }
   ] as { label: string; value: Objective }[];
 
-  constructor(private fb: FormBuilder, private mealPlan: MealPlanService,private iaService: IaHistoryService,private snackBar: MatSnackBar,private firestore: Firestore, private auth: AuthService)  {
+  constructor(private fb: FormBuilder, private mealPlan: MealPlanService,private iaService: IaHistoryService,private snackBar: MatSnackBar,private firestore: Firestore, private auth: AuthService, private location: Location,private router: Router)  {
     this.form = this.fb.group({
       peso:           [null, [Validators.required, Validators.min(30)]],
       altura:         [null, [Validators.required, Validators.min(100)]],
@@ -159,5 +162,7 @@ readonly mealTypes  = ['Desayuno','Almuerzo','Merienda','Cena'] as const;
     const iaHistoryRef = collection(this.firestore, `users/${userId}/iaHistory`);
     await addDoc(iaHistoryRef, entry);
   }
-
+  volver() {
+    this.router.navigate(['/']);
+  }
 }

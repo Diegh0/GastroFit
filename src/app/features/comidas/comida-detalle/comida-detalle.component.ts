@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { Comida } from 'src/app/core/models/comida.model';
 import { ComidaService } from 'src/app/core/services/comida.service';
 import { IaHistoryService } from 'src/app/core/services/ia-history.service';
-
+import { Location } from '@angular/common';
 @Component({
     selector: 'app-comida-detalle',
     templateUrl: './comida-detalle.component.html',
@@ -17,7 +17,9 @@ export class ComidaDetalleComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private comidaService: ComidaService,
-    private iaHistoryService: IaHistoryService
+    private iaHistoryService: IaHistoryService,
+    private location: Location,
+    private router: Router
 
   ) {}
 
@@ -50,5 +52,7 @@ export class ComidaDetalleComponent implements OnInit {
   }
   
   
-  
+  volver() {
+    this.router.navigate(['/']);
+  }
 }

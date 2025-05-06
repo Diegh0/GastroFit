@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { updateProfile } from 'firebase/auth';
 import { FormsModule } from '@angular/forms';
 
@@ -33,7 +33,8 @@ export class PerfilComponent implements OnInit {
 
   constructor(
     private perfilService: PerfilService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -104,7 +105,9 @@ export class PerfilComponent implements OnInit {
   
     console.log('Pesos de prueba insertados');
   }
-  
+  volver() {
+    this.router.navigate(['/']);
+  }  
   
   
 }

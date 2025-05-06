@@ -9,12 +9,17 @@ import { ConfirmacionDialogComponent } from 'src/app/shared/components/confirmac
 import { PlanificacionService } from 'src/app/core/services/planificacion.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JoyrideService } from 'ngx-joyride';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-planificador-semanal',
   templateUrl: './planificador-semanal.component.html',
   styleUrls: ['./planificador-semanal.component.scss'],
-  imports: [CommonModule, DragDropModule, FormsModule],
+  imports: [CommonModule, DragDropModule, FormsModule,MatIconModule,
+    MatButtonModule,],
 })
 export class PlanificadorSemanalComponent implements OnInit {
   dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -44,7 +49,9 @@ export class PlanificadorSemanalComponent implements OnInit {
     private planificacionService: PlanificacionService,
     private dialog: MatDialog,
     private auth:AuthService,
-    private joyrideService: JoyrideService
+    private joyrideService: JoyrideService,
+    private location: Location,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -308,5 +315,7 @@ export class PlanificadorSemanalComponent implements OnInit {
       showPrevButton: true
     });
   }
-  
+  volver() {
+    this.router.navigate(['/']);
+  }
 }

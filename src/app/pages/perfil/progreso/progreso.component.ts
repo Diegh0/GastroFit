@@ -14,11 +14,14 @@ import { ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AfterViewInit } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Location } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-progreso',
   templateUrl: './progreso.component.html',
   styleUrls: ['./progreso.component.scss'],
-  imports:[MatCardModule,NgChartsModule,MatTableModule,MatPaginatorModule,MatSortModule,MatTabsModule,CommonModule,MatProgressSpinnerModule]
+  imports:[MatCardModule,NgChartsModule,MatTableModule,MatPaginatorModule,MatSortModule,MatTabsModule,CommonModule,MatProgressSpinnerModule,MatButtonModule,MatIconModule]
 })
 export class ProgresoComponent implements OnInit, AfterViewInit {
 
@@ -71,7 +74,7 @@ export class ProgresoComponent implements OnInit, AfterViewInit {
   constructor(
     private firestore: Firestore,
     private authService: AuthService,
-    
+    private location: Location
   ) {}
 
  ngAfterViewInit(): void {
@@ -172,5 +175,7 @@ export class ProgresoComponent implements OnInit, AfterViewInit {
   }
   graficaLista = false;
 
-
+  volver() {
+    this.location.back();
+  }
 }
