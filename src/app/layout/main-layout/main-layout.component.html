@@ -43,6 +43,11 @@
         </button>
 
         <button mat-raised-button color="primary" (click)="logout()">Cerrar sesión</button>
+        <button mat-menu-item [routerLink]="['/perfil']">
+          <mat-icon>person</mat-icon>
+          Perfil
+        </button>
+        
       </div>
     </mat-menu>
   </ng-container>

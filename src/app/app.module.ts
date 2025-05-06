@@ -25,6 +25,9 @@ import { CommonModule } from '@angular/common';
 import { IaComponent } from './pages/ia/ia.component';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { ProgresoComponent } from './pages/perfil/progreso/progreso.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -35,6 +38,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   ],
   imports: [
     MaterialModule,
+    NgChartsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -51,7 +55,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    }) 
+    }) ,
   ]
   ,
   providers: [],

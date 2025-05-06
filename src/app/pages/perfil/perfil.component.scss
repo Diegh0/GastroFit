@@ -1,0 +1,22 @@
+.perfil-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 16px;
+  
+    h2 {
+      margin-bottom: 16px;
+      text-align: center;
+    }
+  
+    .perfil-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  
+    .ver-progreso-btn {
+      margin-top: 24px;
+      text-align: center;
+    }
+  }
+  

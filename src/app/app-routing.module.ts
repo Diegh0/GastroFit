@@ -5,6 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { IaComponent } from './pages/ia/ia.component';
 import { VerificacionComponent } from './auth/verificacion/verificacion.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { ProgresoComponent } from './pages/perfil/progreso/progreso.component';
 
 const routes: Routes = [
   // Ruta para login/registro
@@ -38,10 +40,23 @@ const routes: Routes = [
         loadChildren: () =>
           import('./features/planificacion/planificacion.module').then(m => m.PlanificacionModule)
       },
-      { path: 'ia', component: IaComponent } // 🔓 pública
+      { path: 'ia', component: IaComponent }, // 🔓 pública
+      {
+        path: 'perfil',
+        children: [
+          {
+            path: '',
+            component: PerfilComponent
+          },
+          {
+            path: 'progreso',
+            component: ProgresoComponent
+          }
+        ]
+      },
     ]
   },
-
+  
   // Fallback: redirige a home si no se encuentra ruta
   { path: '**', redirectTo: '' }
 ];

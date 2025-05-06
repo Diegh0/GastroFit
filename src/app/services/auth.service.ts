@@ -3,6 +3,7 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signO
 import { Router } from '@angular/router';
 import { onAuthStateChanged, reload, sendEmailVerification, User } from 'firebase/auth';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { updateProfile } from 'firebase/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -40,5 +41,17 @@ export class AuthService {
     const user = await firstValueFrom(this.user$);
     return user?.uid || null;
   }
-  
+  async getUserData() {
+    return this.auth.currentUser;
+  }
+
+
+  async updateDisplayName(nombre: string) {
+    console.log('Actualizando Firebase Auth con nombre:', nombre); // 👈
+    const user = await this.getUserData();
+    if (user) {
+      await updateProfile(user, { displayName: nombre });
+    }
+  }
+
 }

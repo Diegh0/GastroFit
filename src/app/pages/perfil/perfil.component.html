@@ -1,0 +1,44 @@
+
+<div class="perfil-container">
+    <h2>Mi perfil</h2>
+    <mat-card>
+      <mat-card-content>
+        <form class="perfil-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput [(ngModel)]="nombre" name="nombre" />
+
+          </mat-form-field>
+          
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput [value]="correo" disabled />
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Peso actual (kg)</mat-label>
+            <input matInput type="number" [(ngModel)]="peso" name="peso" />
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Altura (cm)</mat-label>
+            <input matInput type="number" [(ngModel)]="altura" name="altura" />
+          </mat-form-field>
+          <button mat-stroked-button color="warn" (click)="insertarPesosDePrueba()">
+            Insertar pesos de prueba
+          </button>
+          
+  
+          <button mat-raised-button color="primary" (click)="actualizarDatos()">Actualizar datos</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  
+    <div class="ver-progreso-btn">
+      <button mat-stroked-button color="accent" [routerLink]="['/perfil/progreso']">
+        Ver progreso
+      </button>
+    </div>
+  </div>
+  
