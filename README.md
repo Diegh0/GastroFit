@@ -39,7 +39,7 @@
   </p>
 
 - 📆 **Seguimiento y analisis continuo del peso**
--   <p align="center">
+    <p align="center">
      <img src="src/assets/github/estadisticas.png" alt="Vista escritorio" width="30%"/>
   </p>
 - 📱 **100% responsive** y funcional como **PWA** (instalable)
