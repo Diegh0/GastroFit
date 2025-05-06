@@ -26,6 +26,7 @@
         name="password"
         required>
     </mat-form-field>
+    <!-- Enlace para recuperar contraseña -->
 
     <!-- Campo para confirmar contraseña (solo en registro) -->
     <div *ngIf="showRegister" [@toggleAnimation]>
@@ -39,7 +40,15 @@
           required>
       </mat-form-field>
     </div>
-
+    <div *ngIf="showRegister" class="requisitos-password">
+      <p>La contraseña debe contener:</p>
+      <ul>
+        <li>🔒 Al menos 6 caracteres</li>
+        <li>🔠 Una letra mayúscula</li>
+        <li>🔡 Una letra minúscula</li>
+        <li>🔢 Un número</li>
+      </ul>
+    </div>
     <!-- Botón de envío -->
     <button mat-raised-button color="primary" type="submit" class="full-width">
       {{ showRegister ? 'Registrarse' : 'Iniciar Sesión' }}
@@ -50,6 +59,11 @@
   <div class="toggle-link">
     <a (click)="toggle()" style="cursor: pointer;">
       {{ showRegister ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate' }}
+    </a>
+  </div>
+  <div *ngIf="!showRegister" class="forgot-password">
+    <a (click)="recuperarContrasena()" style="cursor: pointer;">
+      ¿Has olvidado tu contraseña?
     </a>
   </div>
 </div>

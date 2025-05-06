@@ -79,14 +79,21 @@ export class AuthComponent implements OnInit {
         this.router.navigate(['/home']);
       })
       .catch(err => {
+        console.error("Error en login:", err); // Para depurar
         let mensaje = 'Error en el inicio de sesión';
+        
+        // Firebase no da detalles por seguridad, pero puedes distinguir algunos casos comunes:
         if (err.code === 'auth/user-not-found') {
           mensaje = 'Correo no registrado';
         } else if (err.code === 'auth/wrong-password') {
           mensaje = 'Contraseña incorrecta';
+        } else if (err.code === 'auth/invalid-credential') {
+          mensaje = 'Correo o contraseña incorrectos';
         }
+      
         this.snackBar.open(`Error: ${mensaje}`, 'Cerrar', { duration: 3000 });
       });
+      
   }
 
   register() {
@@ -94,38 +101,76 @@ export class AuthComponent implements OnInit {
       this.snackBar.open('Por favor, completa todos los campos', 'Cerrar', { duration: 3000 });
       return;
     }
-    // Validar formato de correo (adicional al validador HTML)
+  
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
     if (!emailRegex.test(this.email.toLowerCase())) {
       this.snackBar.open('Correo electrónico inválido', 'Cerrar', { duration: 3000 });
       return;
     }
-    // Validar que la contraseña tenga al menos 6 caracteres
-    if (this.password.length < 6) {
-      this.snackBar.open('La contraseña debe tener al menos 6 caracteres', 'Cerrar', { duration: 3000 });
+  
+    // Requisitos de contraseña
+    const requisitos = [
+      { regex: /^.{6,}$/, mensaje: 'Al menos 6 caracteres' },
+      { regex: /[A-Z]/, mensaje: 'Una letra mayúscula' },
+      { regex: /[a-z]/, mensaje: 'Una letra minúscula' },
+      { regex: /[0-9]/, mensaje: 'Un número' }
+    ];
+  
+    const errores = requisitos.filter(r => !r.regex.test(this.password)).map(r => r.mensaje);
+    if (errores.length > 0) {
+      this.snackBar.open(`La contraseña debe tener: ${errores.join(', ')}`, 'Cerrar', { duration: 5000 });
       return;
     }
-    // Verificar que ambas contraseñas coincidan
+  
     if (this.password !== this.confirmPassword) {
       this.snackBar.open('Las contraseñas no coinciden', 'Cerrar', { duration: 3000 });
       return;
     }
+  
     this.auth.register(this.email, this.password)
-    .then(() => {
-      this.snackBar.open('Registro exitoso. Verifica tu correo electrónico antes de continuar.', 'Cerrar', {
-        duration: 4000,
+      .then(() => {
+        this.snackBar.open('Registro exitoso. Verifica tu correo antes de continuar.', 'Cerrar', {
+          duration: 4000,
+        });
+        this.router.navigate(['/verificacion']);
+      })
+      .catch(err => {
+        console.error("Error en registro:", err);
+        let mensaje = 'Error en el registro';
+        if (err.code === 'auth/email-already-in-use') {
+          mensaje = 'El correo ya está registrado';
+        } else if (err.code === 'auth/invalid-email') {
+          mensaje = 'El formato del correo no es válido';
+        } else if (err.code === 'auth/weak-password') {
+          mensaje = 'Contraseña demasiado débil';
+        }
+  
+        this.snackBar.open(`Error: ${mensaje}`, 'Cerrar', { duration: 3000 });
       });
-      this.router.navigate(['/verificacion']);
-    })
-    .catch(err => {
-      let mensaje = 'Error en el registro';
-      if (err.code === 'auth/email-already-in-use') {
-        mensaje = 'El correo ya está registrado';
-      }
-      this.snackBar.open(`Error: ${mensaje}`, 'Cerrar', { duration: 3000 });
-    });
   }
+  
   volver() {
     this.router.navigate(['/']);
   }
+  recuperarContrasena() {
+    if (!this.email) {
+      this.snackBar.open('Introduce tu correo para restablecer la contraseña', 'Cerrar', {
+        duration: 3000
+      });
+      return;
+    }
+  
+    this.auth.enviarEmailRecuperacion(this.email)
+      .then(() => {
+        this.snackBar.open('Se ha enviado un correo para restablecer la contraseña', 'Cerrar', {
+          duration: 4000
+        });
+      })
+      .catch(() => {
+        this.snackBar.open('Error al enviar el correo de recuperación', 'Cerrar', {
+          duration: 3000
+        });
+      });
+  }
+  
 }

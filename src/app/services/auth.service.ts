@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { onAuthStateChanged, reload, sendEmailVerification, User } from 'firebase/auth';
+import { onAuthStateChanged, reload, sendEmailVerification, sendPasswordResetEmail, User } from 'firebase/auth';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { updateProfile } from 'firebase/auth';
 
@@ -53,5 +53,7 @@ export class AuthService {
       await updateProfile(user, { displayName: nombre });
     }
   }
-
+  enviarEmailRecuperacion(email: string): Promise<void> {
+    return sendPasswordResetEmail(this.auth, email);
+  }
 }
