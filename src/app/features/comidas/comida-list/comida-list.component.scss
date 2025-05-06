@@ -77,9 +77,9 @@
   color: inherit;
 }
 .estrella {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  //position: absolute;
+ // top: 10px;
+  //right: 10px;
   background: transparent;
   border: none;
   font-size: 1.5rem;
@@ -112,4 +112,11 @@
     }
   }
 }
+.btn-borrar-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 

@@ -19,12 +19,18 @@
 
       <p><strong>Creado:</strong> {{ comida.fechaCreacion | date:'shortDate' }}</p>
 
-      <div class="acciones">
+      <!-- <div class="acciones">
         <button class="papelera" (click)="eliminarComida(comida)" title="Eliminar comida">🗑️</button>
-      </div>
-      <button class="estrella" (click)="toggleFavorito(comida)">
+      </div> -->
+      <div class="btn-borrar-container">
+        <app-delete-button (click)="eliminarComida(comida)"></app-delete-button>
+     
+      
+      <!-- <button class="estrella" (click)="toggleFavorito(comida)">
         {{ comida.favorita ? '⭐' : '☆' }}
-      </button>
+      </button> -->
+      <app-like-button (click)="toggleFavorito(comida)"></app-like-button>
+    </div>   
     </div>
   </div>
 </div>

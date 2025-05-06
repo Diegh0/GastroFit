@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AfiliadoProducto, Comida } from 'src/app/core/models/comida.model';
 import { AffiliateService } from 'src/app/services/affiliate.service';
+import { ConfirmDialogComponent } from 'src/app/shared/components/shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-comida-list',
@@ -14,7 +16,7 @@ export class ComidaListComponent {
   @Output() favoritoCambiado = new EventEmitter<Comida>();
   @Output() comidaEliminada = new EventEmitter<Comida>();
 
-  constructor(public affiliate: AffiliateService) {}
+  constructor(public affiliate: AffiliateService,private dialog: MatDialog) {}
 
   
 
@@ -23,8 +25,16 @@ export class ComidaListComponent {
   }
 
   eliminarComida(comida: Comida): void {
-    this.comidaEliminada.emit(comida);
-    
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { mensaje: `¿Eliminar la comida "${comida.nombre}"?` },
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(confirmado => {
+      if (confirmado) {
+        this.comidaEliminada.emit(comida);
+      }
+    });
   }
 
   scrollAlFormulario(): void {

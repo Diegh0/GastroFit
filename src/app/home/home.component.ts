@@ -4,10 +4,11 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { User } from 'firebase/auth';
 import { InstallPromptService } from '../services/install-prompt.service';
+import { StartButtonComponent } from "../shared/components/start-button/start-button.component";
 
 @Component({
   selector: 'app-home',
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule, CommonModule, StartButtonComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

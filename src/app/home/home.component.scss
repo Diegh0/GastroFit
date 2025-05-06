@@ -50,21 +50,10 @@
     margin-bottom: 2rem;
   }
 
-  .boton {
-    padding: 0.8rem 1.6rem;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.3s;
-
-    &:hover {
-      background-color: #43a047;
-    }
+  .boton-container {
+    display: flex;
+    justify-content: center;
+  
   }
 }
 
@@ -106,21 +95,7 @@
     margin-bottom: 1.5rem;
   }
 
-  .boton {
-    padding: 0.8rem 1.6rem;
-    background-color: #388e3c;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.3s;
 
-    &:hover {
-      background-color: #2e7d32;
-    }
-  }
 }
 
 // 📌 Comunes

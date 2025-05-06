@@ -33,8 +33,11 @@
       </div>
       
     </section>
-
-    <button (click)="comenzar()" class="boton">🍽️ Comenzar</button>
+    <div class="boton-container">
+      <app-start-button (click)="comenzar()"></app-start-button>
+    </div>
+   
+    
     
   </div>
 </section>
@@ -71,6 +74,7 @@
   <h2>¿Listo para empezar?</h2>
   <button (click)="comenzar()" class="boton">🗓️ Planifica tu semana</button>
 </section>
+
 <!-- Botón flotante de instalación -->
 <button class="instalar-flotante" (click)="instalarApp()" *ngIf="mostrarBotonInstalar">
   📲 Instalar app
