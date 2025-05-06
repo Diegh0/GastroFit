@@ -37,6 +37,11 @@
   <p align="center">
      <img src="src/assets/github/historial-comidas.png" alt="Vista escritorio" width="30%"/>
   </p>
+
+- 📆 **Seguimiento y analisis continuo del peso**
+-   <p align="center">
+     <img src="src/assets/github/estadisticas.png" alt="Vista escritorio" width="30%"/>
+  </p>
 - 📱 **100% responsive** y funcional como **PWA** (instalable)
 
 ---
