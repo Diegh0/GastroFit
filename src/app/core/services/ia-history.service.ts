@@ -63,6 +63,15 @@ export class IaHistoryService {
       })
     );
   }
+  async getIaHistoryOnce(): Promise<HistoryEntryIA[]> {
+    const user = await firstValueFrom(this.authService.user$);
+    if (!user) return [];
+  
+    const ref = collection(this.firestore, `users/${user.uid}/iaHistory`);
+    const snap = await getDocs(ref);
+    return snap.docs.map(doc => doc.data() as HistoryEntryIA);
+  }
+  
   
   async migrateToMainHistory() {
     const iaRef = await this.iaHistoryRef();

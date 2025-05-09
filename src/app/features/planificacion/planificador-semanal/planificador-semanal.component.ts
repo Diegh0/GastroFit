@@ -59,27 +59,35 @@ export class PlanificadorSemanalComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    // Obtener comidas manuales del historial
     const comidasNormales = await this.comidaService.getComidas();
-    const iaEntries = await firstValueFrom(this.iaHistory.getIaHistory());
   
-    const comidasIA = iaEntries.map(entry => ({
+    // Obtener comidas IA (una sola vez, no observable)
+    const iaEntries = await this.iaHistory.getIaHistoryOnce();
+  
+    // Adaptar las entradas IA al tipo Comida
+    const comidasIAAdaptadas: Comida[] = iaEntries.map(entry => ({
       id: entry.recipeId,
       nombre: entry.nombre,
       ingredientes: entry.ingredientes ?? [],
       imagenUrl: entry.imagenUrl || 'assets/imgPredeterminadaCars.png',
       favorita: entry.favorita ?? false,
       fechaCreacion: entry.fechaGeneracion,
-      source: 'ia'
-    } as Comida));
-
-    this.comidasDisponibles = [...comidasNormales, ...comidasIA];
-    
+      source: 'ia' as 'ia'
+    }));
+  
+    // Unificar ambas listas para mostrar en comidas disponibles
+    this.comidasDisponibles = [...comidasNormales, ...comidasIAAdaptadas];
+  
+    // Cargar planificación semanal desde Firestore
     await this.cargarPlanificacionDesdeFirestore();
-
+  
     // Iniciar tutorial si es la primera vez
-   
     this.iniciarTutorialSiEsPrimeraVez();
   }
+  
+  
+  
 
   mostrarMensajeTemporal(texto: string) {
     this.mensajeConfirmacion = texto;
