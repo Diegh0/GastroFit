@@ -8,11 +8,12 @@ import { firstValueFrom } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class PlanificacionService {
   constructor(private firestore: Firestore, private auth: AuthService) {}
-
+  
   guardarPlanificacion(userId: string, semana: string, planificacion: any): Promise<void> {
     const ref = doc(this.firestore, `users/${userId}/planificacion/${semana}`);
     return setDoc(ref, planificacion);
   }
+  
 
   async getPlanificacion(fechaSemana: string): Promise<PlanificacionSemanal | null> {
     const uid = await this.auth.getUserId();
@@ -33,14 +34,13 @@ export class PlanificacionService {
     const snapshot = await getDocs(ref);
     return snapshot.docs.map(doc => doc.id).sort();
   }
-
   async eliminarPlanificacion(fechaSemana: string): Promise<void> {
     const user = await firstValueFrom(this.auth.user$);
     if (!user) throw new Error('No hay usuario autenticado');
-
+  
     const planificacionesRef = collection(this.firestore, `users/${user.uid}/planificacion`);
     const planificacionDoc = doc(planificacionesRef, fechaSemana);
     await deleteDoc(planificacionDoc);
   }
+  
 }
-

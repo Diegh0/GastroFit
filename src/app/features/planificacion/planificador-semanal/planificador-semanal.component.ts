@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { IaHistoryService } from 'src/app/core/services/ia-history.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-planificador-semanal',
@@ -25,6 +27,7 @@ export class PlanificadorSemanalComponent implements OnInit {
   dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
   franjas = ['Desayuno', 'Comida', 'Merienda', 'Cena'];
   comidasDisponibles: Comida[] = [];
+  //comidasDisponiblesId: Comida[] = [];
   planificacion: { [franja: string]: { [dia: string]: Comida[] } } = {};
   celdasIds: string[] = [];
   mostrarResumenSemanal = false;
@@ -51,11 +54,26 @@ export class PlanificadorSemanalComponent implements OnInit {
     private auth:AuthService,
     private joyrideService: JoyrideService,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private iaHistory: IaHistoryService,
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.comidasDisponibles = await this.comidaService.getComidas();
+    const comidasNormales = await this.comidaService.getComidas();
+    const iaEntries = await firstValueFrom(this.iaHistory.getIaHistory());
+  
+    const comidasIA = iaEntries.map(entry => ({
+      id: entry.recipeId,
+      nombre: entry.nombre,
+      ingredientes: entry.ingredientes ?? [],
+      imagenUrl: entry.imagenUrl || 'assets/imgPredeterminadaCars.png',
+      favorita: entry.favorita ?? false,
+      fechaCreacion: entry.fechaGeneracion,
+      source: 'ia'
+    } as Comida));
+
+    this.comidasDisponibles = [...comidasNormales, ...comidasIA];
+    
     await this.cargarPlanificacionDesdeFirestore();
 
     // Iniciar tutorial si es la primera vez
